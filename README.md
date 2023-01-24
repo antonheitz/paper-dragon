@@ -24,8 +24,14 @@ This Notes app is made to solve some issues with the most open-source apps. Thes
    
    Anyone is more than welcome to contribute to this project as they like. Please keep discussions polite and strive for stable features!
 
-## Documentation Links
+## Documentation 
 
- - [Angular Basics](docs/angular.md)
- - [Publishing the PWA](docs/publish-pwa.md)
- - [Install the PWA](docs/install-pwa.md)
+### Basics
+ - [Angular Basics](docs/basics/angular.md)
+ - [Publishing the PWA](docs/basics/publish-pwa.md)
+ - [Install the PWA](docs/basics/install-pwa.md)
+ - Contribution (TBD)
+
+### Deep Dive
+
+ - [High level Data Encryption & storage flow](docs/deep-dive/encryption.md)
