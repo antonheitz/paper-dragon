@@ -1,27 +1,31 @@
 # Targetnotes
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.2.
+## Project Philosophy
 
-## Development server
+This Notes app is made to solve some issues with the most open-source apps. These are:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+ - **Security**: 
 
-## Code scaffolding
+   Almost all notes apps out there do not encypt the note on the local drive. This can be very crucial to the security, since a lot of differnt applications can access the Filesyste and read the contents of the Notes. Fun comment: many apps claim to be e2e-encrypted, while only taling about the sync of the data. This app is r2r (runtime2runtime) encrypted.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ - **Availability**: 
+   
+   Some notes that provide great features sadly are not available on all common Plattforms/Operating Systems. Also for some OS/Hardware the build and publish needs a lot of prequisites. This app uses the PWA (Progressive Webapp) with a offline-first model, which is easily deployable to any device running Chrome, Mozilla, or Safari with one click.
 
-## Build
+ - **Fexible syncing**: 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+   Syncing the notes for the most open-source apps out there that is either very slow or needs a lot of customized infrastructure. The Goal of this project is to use the fast and efficient direct sync between the app and any CouchDB-instance (open source, easy to set up, and available by numerus external hosts).
 
-## Running unit tests
+ - **Freedom of use**: 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   This project will be licenced under [Apache 2.0 Licence](LICENCE.md). Therefore it is open to any use in this licence context.
 
-## Running end-to-end tests
+ - **Contribution**: 
+   
+   Anyone is more than welcome to contribute to this project as they like. Please keep discussions polite and strive for stable features!
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Documentation Links
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+ - [Angular Basics](docs/angular.md)
+ - [Publishing the PWA](docs/publish-pwa.md)
+ - [Install the PWA](docs/install-pwa.md)
