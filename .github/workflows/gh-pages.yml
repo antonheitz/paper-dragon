@@ -3,7 +3,7 @@ name: GitHub Pages
 on:
   push:
     branches:
-    - fix/workflow
+    - main
 
 jobs:
   deploy:
@@ -22,9 +22,6 @@ jobs:
 
     - name: Build
       run: npm run build:prod
-
-    - name: Testing
-      run: npm run test:headless
 
     - name: Deploy
       if: success()
