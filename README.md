@@ -22,15 +22,17 @@ This Notes app is made to solve some issues with the most open-source apps. Thes
 
  - **Contribution**: 
    
-   Anyone is more than welcome to contribute to this project as they like. Please keep discussions polite and strive for stable features!
+   Anyone is more than welcome to contribute to this project as they like. Please keep discussions polite and strive for stable features! Also please follow the [Contribution Rules](docs/contribution-rules.md).
 
 ## Documentation 
 
+For upcoming developments please see the current [Roadmap](docs/roadmap.md).
+
 ### Basics
+
  - [Angular Basics](docs/basics/angular.md)
  - [Publishing the PWA](docs/basics/publish-pwa.md)
  - [Install the PWA](docs/basics/install-pwa.md)
- - Contribution (TBD)
 
 ### Deep Dive
 
