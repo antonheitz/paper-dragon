@@ -14,34 +14,60 @@ export class PersistentStorageService {
 
   constructor() { 
     this.usersDB = new PouchDB(this.USERS_DB_NAME);
-    this.usersDB.info().then(function (info: any) {
-      console.log(info)
-    })
-    this.addEncryptedUser({
-      name: "Test User",
-      pwHint: "This is the Hint",
-      workspaces: [],
-      theme: "Theme identifier",
-      pwDoubbleHash: "Hash the pw another time!"
-    }).then((result: EncryptedUser) => {
-      console.log(result)
+  }
+
+  // User CRUD Operations
+
+  createUser(newEncryptedUser: NewEncryptedUser): Promise<EncryptedUser> {
+    return new Promise((resolve, reject) => {
+      this.usersDB.post(newEncryptedUser).then((response: DatabaseAddResponse) => {
+        this.usersDB.get(response.id).then((encryptedUser: EncryptedUser) => {
+          resolve(encryptedUser);
+        }).catch((err: Error) => {
+          reject(err);
+        });
+      }).catch((err: Error) => {
+        reject(err);
+      });
     })
   }
 
-  addEncryptedUser(newEncryptedUser: NewEncryptedUser): Promise<EncryptedUser> {
+  loadUsers(): Promise<EncryptedUser[]> {
     return new Promise((resolve, reject) => {
-      this.usersDB.post(newEncryptedUser).then((response: DatabaseAddResponse) => {
-        resolve({
-          _id: response.id,
-          _rev: response.rev,
-          name: newEncryptedUser.name,
-          pwHint: newEncryptedUser.pwHint,
-          workspaces: newEncryptedUser.workspaces,
-          theme: newEncryptedUser.theme,
-          pwDoubbleHash: newEncryptedUser.pwDoubbleHash
-        } as EncryptedUser)
-      }).catch(function (err: Error) {
-        reject(err)
+      this.usersDB.allDocs({
+        include_docs: true,
+        attachments: true
+      }).then((result: any) => {
+        resolve(result.rows.map((row: any) => {
+          return row.doc;
+        }) as EncryptedUser[]);
+      }).catch((err: Error) => {
+        reject(err);
+      });
+    })
+  }
+  
+  updateUser(updatedUser: EncryptedUser): Promise<string> {
+    return new Promise((resolve, reject) => {
+      this.usersDB.get(updatedUser._id).then((fetchedUser: EncryptedUser) => {
+        updatedUser._rev = fetchedUser._rev;
+        return this.usersDB.put(updatedUser).then(() => {
+          resolve(updatedUser._id);
+        }).catch((err: Error) => {
+          reject(err);
+        });
+      }).catch((err: Error) => {
+        reject(err);
+      });
+    })
+  }
+
+  deleteUser(encryptedUser: EncryptedUser): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.usersDB.remove(encryptedUser).then(() => {
+        resolve();
+      }).then((err: Error) => {
+        reject(err);
       });
     })
   }
