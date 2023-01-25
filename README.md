@@ -35,4 +35,4 @@ This Notes app is made to solve some issues with the most open-source apps. Thes
 ### Deep Dive
 
  - [High level Data Encryption & storage flow](docs/deep-dive/encryption.md)
- - [Users and Workspaces](docks/deep-dive/users-and-workspaces.md)
+ - [Users and Workspaces](docs/deep-dive/users-and-workspaces.md)
