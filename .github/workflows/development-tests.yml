@@ -1,4 +1,4 @@
-name: Testing
+name: Development Push / Pull Request
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
     - development
 
 jobs:
-  deploy:
+  Run:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
