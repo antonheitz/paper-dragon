@@ -19,9 +19,9 @@ describe('CryptoService', () => {
   });
 
   it('Encryption and Decryption', async () => {
-    const value: string = "My secret message";
+    const value: string[] = ["My secret message"];
     const secret: string = await service.hashString("Super secret");
-    const encryptedMessage: string = await service.encrypt(value, secret);
-    expect(await service.decrypt(encryptedMessage, secret)).toBe(value);
+    const encryptedMessage: string[] = await service.encrypt(value, secret);
+    expect(await service.decrypt(encryptedMessage, secret)).toEqual(value);
   });
 });

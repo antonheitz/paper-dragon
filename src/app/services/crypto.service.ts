@@ -10,21 +10,45 @@ export class CryptoService {
 
   constructor() { }
 
+  /**
+   * Hash the rawString with SHA256.
+   * 
+   * @param rawString 
+   * @returns tha hash
+   */
   hashString(rawString: string): Promise<string> {
     return new Promise((resolve, reject) => {
       resolve(sha256(rawString).toString());
     });
   }
 
-  encrypt(message: string, secret: string): Promise<string> {
+  /**
+   * Encrypt a set of messages with the secret and AES.
+   * 
+   * @param messages
+   * @param secret 
+   * @returns encrypted messages
+   */
+  encrypt(messages: string[], secret: string): Promise<string[]> {
     return new Promise((resolve, reject) => {
-      resolve(aes.encrypt(message, secret).toString());
+      resolve(messages.map((message: string) => {
+        return aes.encrypt(message, secret).toString();
+      }));
     })
   }
 
-  decrypt(encryptedMessage: string, secret: string): Promise<string> {
+  /**
+   * Decrypt a set of messages with the secret and AES.
+   * 
+   * @param messages 
+   * @param secret 
+   * @returns decrypted messages
+   */
+  decrypt(messages: string[], secret: string): Promise<string[]> {
     return new Promise((resolve, reject) => {
-      resolve(aes.decrypt(encryptedMessage, secret).toString(enc));
-    })
+      resolve(messages.map((message: string) => {
+        return aes.decrypt(message, secret).toString(enc)
+      }));
+    });
   }
 }

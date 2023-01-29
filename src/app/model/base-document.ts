@@ -12,3 +12,5 @@ export interface BaseDocument {
 }
 
 export type EncryptedDocument = EncryptedFile | EncryptedFolder | EncryptedNote | EncryptedRemoteWorkspace | EncryptedSpaceConf | EncryptedUser;
+
+export const RESTRICTED_NOTE_TYPES: string[] = ["user", "space-conf"]

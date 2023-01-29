@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { BaseDocument, EncryptedDocument } from '../interfaces/base-document';
-import { EncryptedFile } from '../interfaces/encrypted/encrypted-file';
-import { EncryptedNote } from '../interfaces/encrypted/encrypted-note';
+import { EncryptedDocument } from '../model/base-document';
+import { EncryptedNote } from '../model/encrypted/encrypted-note';
 import { PersistentStorageService, PERSONAL_WORKSPACE_NAME } from './persistent-storage.service';
 
 describe('PersistentStorageService', () => {
@@ -22,7 +21,7 @@ describe('PersistentStorageService', () => {
     expect(Object.keys(service._workspaces)).toEqual([PERSONAL_WORKSPACE_NAME]);
     // create a new workspace
     const spaceName: string = "test_space";
-    await service.createSpace(spaceName, "", "");
+    await service.createSpace(spaceName, "Test Space", "", "");
     expect(await service.spaceDocumentCount(spaceName)).toBe(1);
     expect(Object.keys(service._workspaces)).toEqual([PERSONAL_WORKSPACE_NAME, spaceName]);
     // create a document
