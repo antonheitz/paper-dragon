@@ -1,13 +1,14 @@
 import { TestBed } from '@angular/core/testing';
-import { EncryptedUser, NewEncryptedUser } from '../interfaces/encrypted-user';
-
-import { PersistentStorageService } from './persistent-storage.service';
+import { BaseDocument, EncryptedDocument } from '../interfaces/base-document';
+import { EncryptedFile } from '../interfaces/encrypted/encrypted-file';
+import { EncryptedNote } from '../interfaces/encrypted/encrypted-note';
+import { PersistentStorageService, PERSONAL_WORKSPACE_NAME } from './persistent-storage.service';
 
 describe('PersistentStorageService', () => {
   let service: PersistentStorageService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ });
     service = TestBed.inject(PersistentStorageService);
   });
 
@@ -15,23 +16,35 @@ describe('PersistentStorageService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('User Crud Operations', async () => {
-    const input: NewEncryptedUser = {
-      name: "Test User",
-      pwHint: "This is the Hint",
-      workspaces: [],
-      theme: "Theme identifier",
-      pwDoubbleHash: "Hash the pw another time!"
+  it('Workspace Operations', async () => { 
+    // check if personal database got created
+    expect(await service.spaceDocumentCount()).toBe(1);
+    expect(Object.keys(service._workspaces)).toEqual([PERSONAL_WORKSPACE_NAME]);
+    // create a new workspace
+    const spaceName: string = "test_space";
+    await service.createSpace(spaceName, "", "");
+    expect(await service.spaceDocumentCount(spaceName)).toBe(1);
+    expect(Object.keys(service._workspaces)).toEqual([PERSONAL_WORKSPACE_NAME, spaceName]);
+    // create a document
+    const newDocument: EncryptedNote = {
+      name: "test note",
+      folderId: "the folder to add it to",
+      content: "Hello there! General Kenobi",
+      type: "note"
     };
-    const encryptedUser: EncryptedUser = await service.createUser(input);
-    const loadedUsers: EncryptedUser[] = await service.loadUsers();
-    expect(loadedUsers).toEqual([encryptedUser]);
-    encryptedUser.pwHint = "This is the new Hint!";
-    const editedUserId: string = await service.updateUser(encryptedUser);
-    expect(editedUserId).toBe(encryptedUser._id);
-    const loadedEditedUsers: EncryptedUser[] = await service.loadUsers();    
-    await service.deleteUser(loadedEditedUsers[0]);
-    const loadedDeleteddUsers: EncryptedUser[] = await service.loadUsers();    
-    expect(loadedDeleteddUsers.length).toBe(0);
+    const addedDocument: EncryptedNote = (await service.createDocument(newDocument, spaceName)) as EncryptedNote;
+    // update document
+    addedDocument.name = "New Name of the Note";
+    const updatedDocument: EncryptedNote = (await service.updateDocument(addedDocument, spaceName)) as EncryptedNote;
+    // load documents and check document
+    const spaceDocuments: EncryptedDocument[] = await service.loadSpace(spaceName);
+    const extractedNote: EncryptedNote = spaceDocuments.filter(item => item.type === "note")[0] as EncryptedNote;
+    expect(extractedNote.name).toBe(addedDocument.name);
+    // delete documents
+    await service.deleteDocument(addedDocument, spaceName);
+    expect(await service.spaceDocumentCount(spaceName)).toBe(1);
+    // delete all workspaces
+    await service.deleteAllSpaces()
+    expect(Object.keys(service._workspaces).length).toBe(0);
   });
 });
