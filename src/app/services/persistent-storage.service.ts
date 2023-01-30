@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
-import { EncryptedDocument, RESTRICTED_NOTE_TYPES } from '../model/base-document';
+import { EncryptedDocument } from '../model/base-document';
 import { EncryptedSpaceConf } from '../model/encrypted/encrypted-space-conf';
 
 interface RegisteredWorkspace {

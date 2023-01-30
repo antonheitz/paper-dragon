@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CryptoService } from './crypto.service';
+import { CryptoService, MessageTuples } from './crypto.service';
 
 describe('CryptoService', () => {
   let service: CryptoService;
@@ -19,9 +19,15 @@ describe('CryptoService', () => {
   });
 
   it('Encryption and Decryption', async () => {
-    const value: string[] = ["My secret message"];
+    const value: MessageTuples = {
+      one: "My secret message",
+      anotherOne: "Another secret message",
+      thisToo: "Message three"
+    };
+    const valueBackup: MessageTuples = JSON.parse(JSON.stringify(value));
     const secret: string = await service.hashString("Super secret");
-    const encryptedMessage: string[] = await service.encrypt(value, secret);
-    expect(await service.decrypt(encryptedMessage, secret)).toEqual(value);
+    const encryptedMessage: MessageTuples = await service.encrypt(value, secret);
+    const decryptedMessage: MessageTuples = await service.decrypt(encryptedMessage, secret);
+    expect(decryptedMessage).toEqual(valueBackup);
   });
 });

@@ -3,6 +3,10 @@ import sha256 from 'crypto-js/sha256';
 import aes from 'crypto-js/aes';
 import enc from 'crypto-js/enc-utf8';
 
+export interface MessageTuples {
+  [key: string]: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -29,11 +33,12 @@ export class CryptoService {
    * @param secret 
    * @returns encrypted messages
    */
-  encrypt(messages: string[], secret: string): Promise<string[]> {
+  encrypt(messages: MessageTuples, secret: string): Promise<MessageTuples> {
     return new Promise((resolve, reject) => {
-      resolve(messages.map((message: string) => {
-        return aes.encrypt(message, secret).toString();
-      }));
+      Object.keys(messages).forEach((messageKey: string) => {
+        messages[messageKey] = aes.encrypt(messages[messageKey], secret).toString();
+      });
+      resolve(messages);
     })
   }
 
@@ -44,11 +49,12 @@ export class CryptoService {
    * @param secret 
    * @returns decrypted messages
    */
-  decrypt(messages: string[], secret: string): Promise<string[]> {
+  decrypt(messages: MessageTuples, secret: string): Promise<MessageTuples> {
     return new Promise((resolve, reject) => {
-      resolve(messages.map((message: string) => {
-        return aes.decrypt(message, secret).toString(enc)
-      }));
+      Object.keys(messages).forEach((messageKey: string) => {
+        messages[messageKey] = aes.decrypt(messages[messageKey], secret).toString(enc);
+      });
+      resolve(messages);
     });
   }
 }
