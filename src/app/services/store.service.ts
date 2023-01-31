@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
+import { CryptoService } from './crypto.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
 
-  constructor() { }
+  constructor(private cryptoService: CryptoService) { }
 
-  // Users 
+  loadPersonalSpace(): Promise<void> {
+    return new Promise((resolve, reject) => {
+
+    });
+  }
 
 }
