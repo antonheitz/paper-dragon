@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { EncryptedDocument } from '../model/base-document';
-import { EncryptedNote } from '../model/encrypted/encrypted-note';
+import { EncryptedNote } from '../model/storage/encrypted-note';
 import { PersistentStorageService, PERSONAL_WORKSPACE_NAME } from './persistent-storage.service';
 
 describe('PersistentStorageService', () => {
@@ -26,6 +26,8 @@ describe('PersistentStorageService', () => {
     expect(Object.keys(service._workspaces)).toEqual([PERSONAL_WORKSPACE_NAME, spaceName]);
     // create a document
     const newDocument: EncryptedNote = {
+      _id: "this will be replaced",
+      _rev: "this too",
       name: "test note",
       folderId: "the folder to add it to",
       content: "Hello there! General Kenobi",
@@ -39,6 +41,7 @@ describe('PersistentStorageService', () => {
     const spaceDocuments: EncryptedDocument[] = await service.loadSpace(spaceName);
     const extractedNote: EncryptedNote = spaceDocuments.filter(item => item.type === "note")[0] as EncryptedNote;
     expect(extractedNote.name).toBe(addedDocument.name);
+    console.log(addedDocument)
     // delete documents
     await service.deleteDocument(addedDocument, spaceName);
     expect(await service.spaceDocumentCount(spaceName)).toBe(1);
