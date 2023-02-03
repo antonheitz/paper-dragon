@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import sha256 from 'crypto-js/sha256';
 import aes from 'crypto-js/aes';
 import enc from 'crypto-js/enc-utf8';
+import { RuntimeDocument } from '../model/runtime-document';
 
 export interface MessageTuples {
   [key: string]: string;
@@ -55,6 +56,12 @@ export class CryptoService {
         messages[messageKey] = aes.decrypt(messages[messageKey], secret).toString(enc);
       });
       resolve(messages);
+    });
+  }
+
+  decryptRuntimeDocument(document: RuntimeDocument, keys: string[], secret: string): Promise<RuntimeDocument> {
+    return new Promise((resolve, reject) => {
+      const 
     });
   }
 }
