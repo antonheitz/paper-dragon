@@ -88,6 +88,13 @@ export class CryptoService {
     return aes.decrypt(message, secret).toString(enc);
   }
 
+  /**
+   * Decrypt a runtime document in its original reference
+   * 
+   * @param document 
+   * @param secret 
+   * @returns 
+   */
   decryptRuntimeDocument(document: RuntimeDocument, secret: string): Promise<RuntimeDocument> {
     return new Promise((resolve, reject) => {
       if (!document.decrypted) {
@@ -133,6 +140,13 @@ export class CryptoService {
     });
   }
 
+  /**
+   * Create an encrypted document from the passed document
+   * 
+   * @param document 
+   * @param secret 
+   * @returns 
+   */
   toStorageDocument(document: RuntimeDocument, secret: string): Promise<EncryptedDocument> {
     return new Promise((resolve, reject) => {
       switch (document.type) {

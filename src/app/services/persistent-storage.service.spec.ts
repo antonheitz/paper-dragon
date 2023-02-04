@@ -41,7 +41,6 @@ describe('PersistentStorageService', () => {
     const spaceDocuments: EncryptedDocument[] = await service.loadSpace(spaceName);
     const extractedNote: EncryptedNote = spaceDocuments.filter(item => item.type === "note")[0] as EncryptedNote;
     expect(extractedNote.name).toBe(addedDocument.name);
-    console.log(addedDocument)
     // delete documents
     await service.deleteDocument(addedDocument, spaceName);
     expect(await service.spaceDocumentCount(spaceName)).toBe(1);

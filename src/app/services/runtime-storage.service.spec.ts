@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { RuntimeStorageService } from './runtime-storage.service';
 
 describe('RuntimeStorageService', () => {
@@ -16,6 +15,5 @@ describe('RuntimeStorageService', () => {
 
   it('should be created', async () => {
     const load = await service.init();
-    console.log(load)
   });
 });
