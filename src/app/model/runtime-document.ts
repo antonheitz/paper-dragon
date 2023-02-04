@@ -8,6 +8,7 @@ import { RuntimeUserConf } from "./runtime/runtime-user-conf"
 
 export interface BaseRuntimeDocument extends BaseDocument {
     decrypted: boolean
+    encryptedKeys: string[]
 }
 
 export type RuntimeDocument = RuntimeFile | RuntimeFolder | RuntimeNote | RuntimeRemoteWorkspace | RuntimeSpaceConf | RuntimeUserConf;

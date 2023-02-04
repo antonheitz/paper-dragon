@@ -3,4 +3,5 @@ import { EncryptedNote } from "../storage/encrypted-note";
 
 export interface RuntimeNote extends BaseRuntimeDocument, EncryptedNote {
     type: "note"
+    encryptedKeys: ["name", "content"]
 }

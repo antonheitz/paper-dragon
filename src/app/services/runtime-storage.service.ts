@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EncryptedDocument } from '../model/base-document';
+import { RuntimeDocument } from '../model/runtime-document';
 import { RuntimeFile } from '../model/runtime/runtime-file';
 import { RuntimeFolder } from '../model/runtime/runtime-folder';
 import { RuntimeNote } from '../model/runtime/runtime-note';
@@ -58,6 +59,7 @@ export class RuntimeStorageService {
             pwDoubleHash: "not loaded",
             personal: false,
             type: "space-conf",
+            encryptedKeys: [],
             decrypted: false,
             _id: "not loaded",
             _rev: "not loaded"
@@ -74,6 +76,7 @@ export class RuntimeStorageService {
                 name: document.name,
                 value: document.value,
                 type: document.type,
+                encryptedKeys: ["name", "value"],
                 decrypted: false,
                 _id: document._id,
                 _rev: document._rev
@@ -89,6 +92,7 @@ export class RuntimeStorageService {
                 pwDoubleHash: document.pwDoubleHash,
                 personal: document.personal,
                 type: document.type,
+                encryptedKeys: [],
                 decrypted: false,
                 _id: document._id,
                 _rev: document._rev
@@ -100,6 +104,7 @@ export class RuntimeStorageService {
                 remoteConfig: document.remoteConfig,
                 pwHash: document.pwHash,
                 type: document.type,
+                encryptedKeys: ["remoteConfig", "pwHash"],
                 decrypted: false,
                 _id: document._id,
                 _rev: document._rev
@@ -112,6 +117,7 @@ export class RuntimeStorageService {
                 name: document.name,
                 parent: document.parent,
                 type: document.type,
+                encryptedKeys: ["name"],
                 decrypted: false,
                 _id: document._id,
                 _rev: document._rev
@@ -125,6 +131,7 @@ export class RuntimeStorageService {
                 folderId: document.folderId,
                 content: document.content,
                 type: document.type,
+                encryptedKeys: ["name", "content"],
                 decrypted: false,
                 _id: document._id,
                 _rev: document._rev
@@ -138,6 +145,7 @@ export class RuntimeStorageService {
                 folderId: document.folderId,
                 content: document.content,
                 type: document.type,
+                encryptedKeys: ["name", "content"],
                 decrypted: false,
                 _id: document._id,
                 _rev: document._rev
@@ -170,8 +178,20 @@ export class RuntimeStorageService {
           try {
             // decrypt all the files in the current space
             selectedSpace.spaceConf.decrypted = true;
-            selectedSpace.userConf.forEach((userConf: RuntimeUserConf) => {
-
+            selectedSpace.userConf.forEach(async (userConf: RuntimeUserConf) => {
+              await this.cryptoService.decryptRuntimeDocument(userConf, secret);
+            });
+            selectedSpace.remoteSpaces.forEach(async (remoteSpace: RuntimeRemoteWorkspace) => {
+              await this.cryptoService.decryptRuntimeDocument(remoteSpace, secret);
+            });
+            selectedSpace.folder.forEach(async (folder: RuntimeFolder) => {
+              await this.cryptoService.decryptRuntimeDocument(folder, secret);
+            });
+            selectedSpace.notes.forEach(async (note: RuntimeNote) => {
+              await this.cryptoService.decryptRuntimeDocument(note, secret);
+            });
+            selectedSpace.files.forEach(async (file: RuntimeFile) => {
+              await this.cryptoService.decryptRuntimeDocument(file, secret);
             });
             resolve()
           } catch(e) {
@@ -179,6 +199,19 @@ export class RuntimeStorageService {
             reject(e)
           }
         }
+      }).catch((err: Error) => {
+        reject(err);
+      });
+    });
+  }
+
+  saveDocument(document: RuntimeDocument, secret: string, spaceId?: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.cryptoService.toStorageDocument(document, secret).then((storageDocument: EncryptedDocument) => {
+        this.persistentStorageService.updateDocument(storageDocument).then((updated: EncryptedDocument) => {
+          document._rev = updated._rev;
+          resolve();
+        })
       }).catch((err: Error) => {
         reject(err);
       });
