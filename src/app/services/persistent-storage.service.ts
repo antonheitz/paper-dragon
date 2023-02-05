@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
-import { EncryptedDocument, RESTRICTED_NOTE_TYPES } from '../model/base-document';
-import { EncryptedSpaceConf } from '../model/encrypted/encrypted-space-conf';
+import { EncryptedDocument } from '../model/base-document';
+import { EncryptedSpaceConf } from '../model/storage/encrypted-space-conf';
 
 interface RegisteredWorkspace {
   _id: string
@@ -174,13 +174,16 @@ export class PersistentStorageService {
    */
   initSpace(pwDoubleHash: string, pwHint: string, spaceId: string, spaceName: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.createDocument({
+      const spaceConf: EncryptedSpaceConf = {
+        _id: "",
+        _rev: "",
         name: spaceName,
         pwDoubleHash: pwDoubleHash,
         pwHint: pwHint,
         personal: (spaceId === PERSONAL_WORKSPACE_NAME),
         type: "space-conf"
-      } as EncryptedSpaceConf, spaceId).then((document: EncryptedDocument) => {
+      }
+      this.createDocument(spaceConf, spaceId).then((document: EncryptedDocument) => {
         resolve()
       }).catch((err: Error) => {
         reject(err);
@@ -279,7 +282,10 @@ export class PersistentStorageService {
   createDocument(document: EncryptedDocument, spaceId?: string): Promise<EncryptedDocument> {
     return new Promise((resolve, reject) => {
       this._selectSpace(spaceId).then((spaceStorage: any) => {
-        spaceStorage.post(document).then((response: DatabaseCondensedResponse) => {
+        const createDocument: any = document;
+        delete createDocument._id;
+        delete createDocument._rev;
+        spaceStorage.post(createDocument).then((response: DatabaseCondensedResponse) => {
           spaceStorage.get(response.id).then((returnDocument: EncryptedDocument) => {
             resolve(returnDocument);
           }).catch((err: Error) => {
@@ -291,6 +297,25 @@ export class PersistentStorageService {
       }).catch((err: Error) => {
         reject(err);
       });
+    });
+  }
+
+  /**
+   * Get all documents for a given type
+   * 
+   * @param documentType 
+   * @param spaceId 
+   * @returns 
+   */
+  getDocumentByType(documentType: string, spaceId?: string): Promise<EncryptedDocument[]> {
+    return new Promise((resolve, reject) => {
+      this.loadSpace(spaceId).then((documents: EncryptedDocument[]) => {
+        resolve(documents.filter((item: EncryptedDocument) => {
+          return item.type === documentType;
+        }))
+      }).catch((err: Error) => {
+        reject(err);
+      })
     });
   }
 

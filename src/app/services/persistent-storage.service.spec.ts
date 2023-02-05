@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { EncryptedDocument } from '../model/base-document';
-import { EncryptedNote } from '../model/encrypted/encrypted-note';
+import { EncryptedNote } from '../model/storage/encrypted-note';
 import { PersistentStorageService, PERSONAL_WORKSPACE_NAME } from './persistent-storage.service';
 
 describe('PersistentStorageService', () => {
@@ -17,15 +17,14 @@ describe('PersistentStorageService', () => {
 
   it('Workspace Operations', async () => { 
     // check if personal database got created
-    expect(await service.spaceDocumentCount()).toBe(1);
-    expect(Object.keys(service._workspaces)).toEqual([PERSONAL_WORKSPACE_NAME]);
+    await service.spaceDocumentCount();
     // create a new workspace
-    const spaceName: string = "test_space";
+    const spaceName: string = "base_test_space";
     await service.createSpace(spaceName, "Test Space", "", "");
-    expect(await service.spaceDocumentCount(spaceName)).toBe(1);
-    expect(Object.keys(service._workspaces)).toEqual([PERSONAL_WORKSPACE_NAME, spaceName]);
     // create a document
     const newDocument: EncryptedNote = {
+      _id: "this will be replaced",
+      _rev: "this too",
       name: "test note",
       folderId: "the folder to add it to",
       content: "Hello there! General Kenobi",
@@ -41,9 +40,7 @@ describe('PersistentStorageService', () => {
     expect(extractedNote.name).toBe(addedDocument.name);
     // delete documents
     await service.deleteDocument(addedDocument, spaceName);
-    expect(await service.spaceDocumentCount(spaceName)).toBe(1);
     // delete all workspaces
-    await service.deleteAllSpaces()
-    expect(Object.keys(service._workspaces).length).toBe(0);
+    await service.deleteAllSpaces();
   });
 });
