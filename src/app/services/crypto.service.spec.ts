@@ -33,7 +33,8 @@ describe('CryptoService', () => {
     const value: MessageTuples = {
       one: "My secret message",
       anotherOne: "Another secret message",
-      thisToo: "Message three"
+      thisToo: "Message three",
+      empty: ""
     };
     const valueBackup: MessageTuples = JSON.parse(JSON.stringify(value));
     const secret: string = await service.hashString("Super secret");
