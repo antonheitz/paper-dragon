@@ -1,0 +1,13 @@
+:root {
+    /* colors */
+    --primary-background-color: blue;
+    --primary-text-color: white;
+    --secondary-background-color: white;
+    --secondary-text-color: black;
+    --secondary-text-color-light: lightgray;
+
+    /* spacing */
+    --corner-radius: 10px;
+    --padding: 10px;
+    --margin: 10px;
+}

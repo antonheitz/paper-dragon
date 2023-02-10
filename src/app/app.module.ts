@@ -8,13 +8,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { FrameComponent } from './frame/frame.component';
+import { ViewComponent } from './view/view.component';
+import { MainComponent } from './view/main/main.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FrameComponent
+    ViewComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
