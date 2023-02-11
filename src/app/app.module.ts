@@ -5,16 +5,15 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { FrameComponent } from './frame/frame.component';
+import { ViewComponent } from './view/view.component';
+import { MainComponent } from './view/main/main.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FrameComponent
+    ViewComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
@@ -26,9 +25,6 @@ import { FrameComponent } from './frame/frame.component';
     }),
     BrowserAnimationsModule,
     // angular material
-    MatSlideToggleModule,
-    MatToolbarModule,
-    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

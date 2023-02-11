@@ -1,0 +1,68 @@
+<div *ngIf="screenSize === 'big'" class="big-wrapper">
+    <div class="column-wrapper first-column">
+        <div class="field-wrapper spaces mat-elevation-z3">
+            spaces
+        </div>
+    </div>
+    <div class="column-wrapper">
+        <div class="field-wrapper folder mat-elevation-z3">
+            folder
+        </div>
+    </div>
+    <div class="column-wrapper">
+        <div class="field-wrapper files mat-elevation-z3">
+            files
+        </div>
+    </div>
+    <div class="column-wrapper last-column">
+        <div class="field-wrapper editor mat-elevation-z3">
+            editor
+        </div>
+    </div>
+</div>
+
+<div *ngIf="screenSize === 'medium'" class="medium-wrapper">
+    <div class="left-column">
+        <div class="header-wrapper">
+            <div class="header-field mat-elevation-z3">
+                header
+            </div>
+        </div>
+        <div class="content-wrapper">
+            <div *ngIf="currentMainView === 'spaces'" class="spaces content-field mat-elevation-z3">
+                spaces
+            </div>
+            <div *ngIf="currentMainView === 'folder'" class="folder content-field mat-elevation-z3">
+                folder
+            </div>
+            <div *ngIf="currentMainView === 'files'" class="files content-field mat-elevation-z3">
+                files
+            </div>
+        </div> 
+    </div>
+    <div class="editor-wrapper">
+        <div class="editor field-wrapper mat-elevation-z3">
+            editor
+        </div>
+    </div>
+</div>
+
+<div *ngIf="screenSize === 'small'" class="small-wrapper">
+    <div class="small-header">
+        Header
+    </div>
+    <div class="small-content">
+        <div *ngIf="currentMainView === 'spaces'" class="spaces small-field-wrapper">
+            spaces
+        </div>
+        <div *ngIf="currentMainView === 'folder'" class="folder small-field-wrapper">
+            folder
+        </div>
+        <div *ngIf="currentMainView === 'files'" class="files small-field-wrapper">
+            files
+        </div>
+        <div *ngIf="currentMainView === 'editor'" class="editor small-field-wrapper">
+            editor
+        </div>
+    </div>
+</div>
