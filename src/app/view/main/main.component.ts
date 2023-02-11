@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { StateService, ScreenSize, CurrentMainView } from 'src/app/services/state.service';
 
 @Component({
   selector: 'app-main',
@@ -9,19 +9,30 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 })
 export class MainComponent {
 
-  @ViewChild(MatSidenav) sideNav!: MatSidenav;
-
-  constructor(private observer: BreakpointObserver) { }
+  constructor(private observer: BreakpointObserver, private stateService: StateService) { }
 
   ngAfterViewInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
       if (res.matches) {
-        this.sideNav.mode = 'over';
-        this.sideNav.close();
+        this.stateService.setScreenSize("medium");
       } else {
-        this.sideNav.mode = 'side';
-        this.sideNav.open();
+        this.stateService.setScreenSize("big");
       }
     });
+    this.observer.observe(['(max-width: 450px)']).subscribe((res) => {
+      if (res.matches) {
+        this.stateService.setScreenSize("small");
+      } else {
+        this.stateService.setScreenSize("medium");
+      }
+    });
+  }
+
+  get screenSize(): ScreenSize {
+    return this.stateService.getScreenSize();
+  }
+
+  get currentMainView(): CurrentMainView {
+    return this.stateService.getCurrentMainView();
   }
 }

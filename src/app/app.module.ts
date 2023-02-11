@@ -5,9 +5,6 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { ViewComponent } from './view/view.component';
 import { MainComponent } from './view/main/main.component';
 
@@ -28,9 +25,6 @@ import { MainComponent } from './view/main/main.component';
     }),
     BrowserAnimationsModule,
     // angular material
-    MatSlideToggleModule,
-    MatToolbarModule,
-    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

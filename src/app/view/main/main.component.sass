@@ -1,34 +1,103 @@
-.main-wrapper
+.big-wrapper
     display: flex
-    flex-direction: column
     width: 100%
-    height: 100vh
+    height: 100%
     
-mat-toolbar
-    background-color: var(--primary-background-color)
-    color: var(--primary-text-color)
+    .column-wrapper
+        padding: var(--padding)
+        height: calc(100% - var(--doubble-padding))
+        padding-left: 0
 
-mat-sidenav
-    margin: var(--margin)
-    width: 200px
-    border-right: none
-    background-color: var(--primary-background-color)
-    color: var(--primary-text-color)
-    border-radius: var(--corner-radius)
-    padding: var(--padding)
-    text-align: center
+        .field-wrapper
+            height: calc(100% - var(--doubble-padding))
+            width: calc(100% - var(--doubble-padding))
+            border-radius: var(--corner-radius)
+            padding: var(--padding)
 
-.content
-    height: calc(100% - calc(var(--margin) * 2))
-    margin: var(--margin)
-    margin-left: calc(var(--margin) * 2)
+    .first-column
+        padding-left: var(--padding)
+
+    .last-column
+        display: flex
+        flex-grow: 1
+
+
+.medium-wrapper
     display: flex
-    justify-content: center
-    align-items: center
-    font-size: 2rem
-    background-color: var(--secondary-background-color)
-    color: var(--secondary-text-color-light)
-    border-radius: var(--corner-radius)
+    width: 100%
+    height: 100%
 
-mat-sidenav-container
-    flex-grow: 1
+    .editor-wrapper
+        padding: var(--padding)
+        height: calc(100% - var(--doubble-padding))
+        padding-left: 0
+        display: flex
+        flex-grow: 1
+
+        .field-wrapper
+            width: 100%
+            padding: var(--padding)
+            border-radius: var(--corner-radius)
+
+    .left-column
+        display: flex
+        flex-direction: column
+        height: 100%
+
+        .header-wrapper
+            padding: var(--padding)
+            width: calc(100% - var(--doubble-padding))
+            padding: var(--padding)
+            padding-bottom: 0
+
+            .header-field
+                width: calc(100% - var(--doubble-padding))
+                border-radius: var(--corner-radius)
+                padding: var(--padding)
+
+        .content-wrapper
+            display: flex
+            flex-grow: 1
+            padding: var(--padding)
+            width: calc(100% - var(--doubble-padding))
+            padding: var(--padding)
+            border-radius: var(--corner-radius)
+            
+            .content-field
+                width: calc(100% - var(--doubble-padding))
+                border-radius: var(--corner-radius)
+                padding: var(--padding)
+
+.small-wrapper
+    display: flex
+    height: 100%
+    width: 100%
+    flex-direction: column
+
+    .small-header
+        width: calc(100% - var(--doubble-padding))
+        padding: var(--padding)
+
+    .small-content
+        display: flex
+        flex-grow: 1
+    
+        .small-field-wrapper
+            width: 100%
+            padding: var(--padding)
+
+.spaces
+    background-color: var(--spaces-background-color)
+    color: var(--spaces-text-color)
+
+.folder
+    background-color: var(--folder-background-color)
+    color: var(--folder-text-color)
+
+.files
+    background-color: var(--files-background-color)
+    color: var(--files-text-color)
+
+.editor
+    background-color: var(--editor-background-color)
+    color: var(--editor-text-color)
