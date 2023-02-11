@@ -1,3 +1,4 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
 
 export type ScreenSize = "big" | "medium" | "small";
@@ -8,7 +9,20 @@ export type CurrentMainView = "spaces" | "folder" | "files" | "editor"
 })
 export class StateService {
 
-  constructor() { }
+  constructor(private observer: BreakpointObserver) { 
+    // Screen size breakpoints
+    const bigBreakpoint: string = '(max-width: 750px)';
+    const mediumBreakpoint: string = '(max-width: 450px)';
+    this.observer.observe([bigBreakpoint, mediumBreakpoint]).subscribe((res) => {
+      if (res.breakpoints[mediumBreakpoint]) {
+        this.setScreenSize("small");
+      } else if (res.breakpoints[bigBreakpoint]) {
+        this.setScreenSize("medium");
+      } else {
+        this.setScreenSize("big");
+      }
+    });
+  }
 
   private screenSize: ScreenSize = "big";
 
