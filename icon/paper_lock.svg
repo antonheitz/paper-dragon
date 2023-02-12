@@ -1,37 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" height="700" width="500">
+<svg xmlns="http://www.w3.org/2000/svg" height="350" width="350">
     
-    <polygon points="30,50 80,0 180,0 230,50" fill="white" stroke="gray" stroke-width="1" />
+    <polygon points="75,50 125,0 225,0 275,50" fill="white" stroke="gray" stroke-width="1" />
     
-    <line x1="72" x2="188" y1="10" y2="10" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
-    <line x1="52" x2="208" y1="30" y2="30" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="117" x2="233" y1="10" y2="10" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="97" x2="253" y1="30" y2="30" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
     
-    <polygon points="30,50 130,50 130,150 30,150" fill="white" stroke="gray" stroke-width="1" />
+    <polygon points="75,50 175,50 175,150 75,150" fill="white" stroke="gray" stroke-width="1" />
     
-    <line x1="110" x2="30" y1="150" y2="150" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
-    <line x1="110" x2="30" y1="120" y2="120" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
-    <line x1="110" x2="30" y1="100" y2="100" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
-    <line x1="110" x2="30" y1="80" y2="80" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
-    <line x1="110" x2="30" y1="60" y2="60" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="155" x2="75" y1="150" y2="150" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="155" x2="75" y1="120" y2="120" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="155" x2="75" y1="100" y2="100" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="155" x2="75" y1="80" y2="80" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="155" x2="75" y1="60" y2="60" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
     
-    <polygon points="130,50 230,50 230,150 130,150" fill="white" stroke="gray" stroke-width="1" />
+    <polygon points="175,50 275,50 275,150 175,150" fill="white" stroke="gray" stroke-width="1" />
     
-    <line x1="230" x2="180" y1="120" y2="120" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
-    <line x1="230" x2="170" y1="100" y2="100" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
-    <line x1="230" x2="150" y1="80" y2="80" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
-    <line x1="230" x2="170" y1="60" y2="60" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="275" x2="225" y1="120" y2="120" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="275" x2="215" y1="100" y2="100" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="275" x2="195" y1="80" y2="80" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="275" x2="215" y1="60" y2="60" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
 
-    <polygon points="0,150 260,150 260,320 230,350 30,350 0,320" fill="white" stroke="gray" stroke-width="1" />
+    <polygon points="45,150 305,150 305,320 275,350 75,350 45,320" fill="white" stroke="gray" stroke-width="1" />
     
-    <line x1="80" x2="180" y1="180" y2="180" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
-    <line x1="0" x2="260" y1="200" y2="200" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
-    <line x1="0" x2="260" y1="220" y2="220" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
-    <line x1="0" x2="260" y1="240" y2="240" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
-    <line x1="0" x2="150" y1="260" y2="260" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
-    <line x1="0" x2="260" y1="290" y2="290" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
-    <line x1="0" x2="260" y1="310" y2="310" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
-    <line x1="12" x2="248" y1="330" y2="330" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="125" x2="225" y1="180" y2="180" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="45" x2="305" y1="200" y2="200" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="45" x2="305" y1="220" y2="220" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="45" x2="305" y1="240" y2="240" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="45" x2="195" y1="260" y2="260" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="45" x2="305" y1="290" y2="290" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="45" x2="305" y1="310" y2="310" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
+    <line x1="57" x2="293" y1="330" y2="330" stroke="gray" stroke-width="5" stroke-dasharray="25 5 5 5 40 5 20 5 54 3"/>
     
-    <circle cx="130" cy="220" fill="black" r="35"/>
-    <polygon points="120,220 140,220 165,320 95,320" fill="black" />
+    <circle cx="175" cy="220" fill="black" r="35"/>
+    <polygon points="165,220 185,220 210,320 140,320" fill="black" />
     
 </svg>
