@@ -17,4 +17,24 @@ export class MainComponent {
   get currentMainView(): CurrentMainView {
     return this.stateService.getCurrentMainView();
   }
+
+  currentResizing: HTMLElement | null = null;
+  baseWidth: number = 0;
+
+  startResize(event: MouseEvent): void {
+    this.currentResizing = ((event.target as HTMLElement).parentElement as HTMLElement);
+    this.baseWidth = this.currentResizing.clientWidth - event.clientX;
+  }
+
+  resize(event: MouseEvent): void {
+    if (this.currentResizing !== null) {
+      this.currentResizing.style.width = `${(this.baseWidth + event.clientX)}px`;
+    }
+  }
+
+  endResize(event: MouseEvent): void {
+    if (this.currentResizing !== null) {
+      this.currentResizing = null;
+    }
+  }
 }
