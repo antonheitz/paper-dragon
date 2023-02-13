@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ScreenSize, StateService } from 'src/app/services/state.service';
 
 @Component({
   selector: 'app-spaces',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class SpacesComponent {
 
+  constructor(private stateService: StateService) { }
+
+  get screenSize(): ScreenSize {
+    return this.stateService.getScreenSize();
+  }
 }

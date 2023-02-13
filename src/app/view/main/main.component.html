@@ -1,4 +1,4 @@
-<div *ngIf="screenSize === 'big'" class="big-wrapper" (pointermove)="resize($event)" (pointerup)="endResize($event)">
+<div *ngIf="screenSize === 'big'" class="big-wrapper" (pointermove)="resize($event)" (pointerup)="endResize($event)" [ngClass]="{'resize-hover': this.currentResizing !== null}">
     <div class="column-wrapper first-column">
         <div class="field-wrapper spaces mat-elevation-z3">
             <app-spaces></app-spaces>
@@ -23,7 +23,7 @@
     </div>
 </div>
 
-<div *ngIf="screenSize === 'medium'" class="medium-wrapper" (pointermove)="resize($event)" (pointerup)="endResize($event)">
+<div *ngIf="screenSize === 'medium'" class="medium-wrapper" (pointermove)="resize($event)" (pointerup)="endResize($event)" [ngClass]="{'resize-hover': this.currentResizing !== null}">
     <div class="left-column">
         <div class="header-wrapper">
             <div class="header-field mat-elevation-z3">
