@@ -1,21 +1,32 @@
 <div class="spaces-wrapper">
     <div class="application-icon">
-        S
+        T
     </div>
     <div class="spaces-list">
-        <div class="space-wrapper">
-            <div class="space-icon">
-                P
+        <div class="space-wrapper" *ngFor="let spaceConf of spaceConfs" (click)="openSpace(spaceConf._id)">
+            <div class="space-icon" title="{{spaceConf.name}}">
+                {{spaceConf.name.charAt(0)}}
             </div>
             <div *ngIf="screenSize !== 'big'" class="space-name">
-                Personal Space
+                <div class="space-name-content">
+                    {{spaceConf.name}}
+                </div>
             </div>
         </div>
-        <div class="add-space">
-            +
+        <div class="add-space-wrapper" (click)="openAddSpace()">
+            <div class="add-space">
+                +
+            </div>
         </div>
     </div>
     <div class="bottom">
-        S
+        <div class="item-wrapper" (click)="openSettings()">
+            <mat-icon class="item-icon" title="Settings">settings</mat-icon>
+            <div *ngIf="screenSize !== 'big'" class="item-name">
+                <div class="item-name-content">
+                    Settings
+                </div>
+            </div>
+        </div>
     </div>
 </div>

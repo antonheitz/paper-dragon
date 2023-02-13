@@ -59,6 +59,23 @@ export class RuntimeStorageService {
   }
 
   /**
+   * Return a list of spaceConfs loaded
+   * 
+   * @returns 
+   */
+  getSpaceConfs(): RuntimeSpaceConf[] {
+    return Object.keys(this.spaces).map(item => this.spaces[item].spaceConf).sort((a: RuntimeSpaceConf, b: RuntimeSpaceConf) => {
+      if (a.personal) {
+        return -1;
+      } else if (b.personal) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+  /**
    * Create Space and load it
    * 
    * @param name 

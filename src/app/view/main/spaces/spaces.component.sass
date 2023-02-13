@@ -5,10 +5,11 @@
 
     .application-icon
         width: 100%
-        text-align: center
+        display: flex
+        justify-content: center
+        align-items: center
         height: var(--space-bubble-diameter)
         font-size: 2rem
-        padding-top: var(--padding)
 
     .spaces-list
         flex-grow: 1
@@ -25,6 +26,9 @@
             display: flex
             flex-direction: row
 
+            &:hover
+                    cursor: pointer
+
             .space-icon
                 display: flex
                 align-items: center
@@ -34,32 +38,59 @@
                 border-radius: var(--space-bubble-radius)
                 background-color: var(--spaces-text-color)
                 color: var(--spaces-background-color)
-                font-size: 2rem
-
-                &:hover
-                    cursor: pointer
+                font-size: 2rem   
 
             .space-name
                 display: flex
                 flex-grow: 1
-                background-color: green
                 align-items: center
-                white-space: nowrap
-                overflow: hidden
-                text-overflow: ellipsis
                 width: 0px
 
-        .add-space
-            display: flex
-            align-items: center
-            justify-content: center
-            height: var(--space-bubble-diameter)
-            width: var(--space-bubble-diameter)
-            color: var(--spaces-text-color)
-            font-size: 2rem
-            
+                .space-name-content
+                    white-space: nowrap
+                    overflow: hidden
+                    text-overflow: ellipsis
+                    padding: var(--padding)
+
+        .add-space-wrapper
+            padding-top: var(--padding)
+
             &:hover
                 cursor: pointer
+
+            .add-space
+                display: flex
+                align-items: center
+                justify-content: center
+                height: var(--space-bubble-diameter)
+                color: var(--spaces-text-color)
+                font-size: 2rem
+                width: 100%
     
     .bottom
         color: var(--spaces-text-color)
+
+        .item-wrapper
+            padding-top: var(--padding)
+            display: flex
+            flex-direction: row
+            
+            &:hover
+                cursor: pointer
+
+            .item-icon
+                height: var(--space-bubble-diameter)
+                width: var(--space-bubble-diameter)
+                font-size: var(--space-bubble-diameter)
+
+            .item-name
+                display: flex
+                flex-grow: 1
+                align-items: center
+                width: 0px
+
+                .item-name-content
+                    white-space: nowrap
+                    overflow: hidden
+                    text-overflow: ellipsis
+                    padding: var(--padding)
