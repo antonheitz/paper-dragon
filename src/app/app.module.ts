@@ -7,13 +7,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ViewComponent } from './view/view.component';
 import { MainComponent } from './view/main/main.component';
+import { SpacesComponent } from './view/main/spaces/spaces.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ViewComponent,
-    MainComponent
+    MainComponent,
+    SpacesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 <div *ngIf="screenSize === 'big'" class="big-wrapper" (pointermove)="resize($event)" (pointerup)="endResize($event)">
     <div class="column-wrapper first-column">
         <div class="field-wrapper spaces mat-elevation-z3">
-            spaces
+            <app-spaces></app-spaces>
         </div>
     </div>
     <div class="column-wrapper data-column">
@@ -32,7 +32,7 @@
         </div>
         <div class="content-wrapper">
             <div *ngIf="currentMainView === 'spaces'" class="spaces content-field mat-elevation-z3">
-                spaces
+                <app-spaces></app-spaces>
             </div>
             <div *ngIf="currentMainView === 'folder'" class="folder content-field mat-elevation-z3">
                 folder
@@ -56,7 +56,7 @@
     </div>
     <div class="small-content">
         <div *ngIf="currentMainView === 'spaces'" class="spaces small-field-wrapper">
-            spaces
+            <app-spaces></app-spaces>
         </div>
         <div *ngIf="currentMainView === 'folder'" class="folder small-field-wrapper">
             folder
