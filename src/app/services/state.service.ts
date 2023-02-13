@@ -11,7 +11,7 @@ export class StateService {
 
   constructor(private observer: BreakpointObserver) { 
     // Screen size breakpoints
-    const bigBreakpoint: string = '(max-width: 750px)';
+    const bigBreakpoint: string = '(max-width: 900px)';
     const mediumBreakpoint: string = '(max-width: 450px)';
     this.observer.observe([bigBreakpoint, mediumBreakpoint]).subscribe((res) => {
       if (res.breakpoints[mediumBreakpoint]) {
