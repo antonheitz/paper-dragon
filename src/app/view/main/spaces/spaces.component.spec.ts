@@ -11,11 +11,8 @@ describe('SpacesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SpacesComponent ],
-      imports: [
-        MatIconModule,
-      ],
-      providers: [ StateService, RuntimeStorageService ]
+      providers: [ SpacesComponent, MatIconModule ],
+      imports: [ MatIconModule ]
     })
     .compileComponents();
 
