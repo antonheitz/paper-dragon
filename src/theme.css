@@ -10,9 +10,14 @@
     --editor-text-color: rgb(0, 0, 0);
 
     /* spacing */
-    --corner-radius: 5px;
+    --corner-radius: 10px;
     --padding: 5px;
+
+    /* spaces */
+    --space-bubble-diameter: 50px;
+    --space-bubble-radius: 50%;
 
     /* calculated */
     --doubble-padding: calc(var(--padding) * 2);
+    --shadow: 0px 0px var(--padding) rgba(0,0,0,0.4);
 }

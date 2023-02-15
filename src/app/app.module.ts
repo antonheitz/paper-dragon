@@ -7,13 +7,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ViewComponent } from './view/view.component';
 import { MainComponent } from './view/main/main.component';
+import { SpacesComponent } from './view/main/spaces/spaces.component';
+
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ViewComponent,
-    MainComponent
+    MainComponent,
+    SpacesComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +29,7 @@ import { MainComponent } from './view/main/main.component';
     }),
     BrowserAnimationsModule,
     // angular material
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

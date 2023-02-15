@@ -1,0 +1,101 @@
+.spaces-wrapper
+    height: 100%
+    display: flex
+    flex-direction: column
+
+    .application-icon
+        width: 100%
+        display: flex
+        justify-content: center
+        align-items: center
+        height: var(--space-bubble-diameter)
+        font-size: 2rem
+
+    .spaces-list
+        flex-grow: 1
+        height: 0px
+        overflow: scroll
+        -ms-overflow-style: none
+        scrollbar-width: none
+
+        &::-webkit-scrollbar 
+            display: none
+
+        .space-wrapper
+            padding-top: var(--padding)
+            display: flex
+            flex-direction: row
+
+            &:hover
+                    cursor: pointer
+
+            .space-icon
+                display: flex
+                align-items: center
+                justify-content: center
+                height: var(--space-bubble-diameter)
+                width: var(--space-bubble-diameter)
+                border-radius: var(--space-bubble-radius)
+                background-color: var(--spaces-background-color)
+                color: var(--spaces-text-color)
+                font-size: 2rem   
+
+            .space-name
+                display: flex
+                flex-grow: 1
+                align-items: center
+                width: 0px
+
+                .space-name-content
+                    white-space: nowrap
+                    overflow: hidden
+                    text-overflow: ellipsis
+                    padding: var(--padding)
+
+        .add-space-wrapper
+            padding-top: var(--padding)
+
+            &:hover
+                cursor: pointer
+
+            .add-space
+                display: flex
+                align-items: center
+                justify-content: center
+                height: var(--space-bubble-diameter)
+                color: var(--spaces-background-color)
+                font-size: 2rem
+                width: 100%
+    
+    .bottom
+        color: var(--spaces-background-color)
+
+        .item-wrapper
+            padding-top: var(--padding)
+            width: 100%
+            display: flex
+            justify-content: center
+            align-items: center
+            
+            &:hover
+                cursor: pointer
+            
+            .item-icon-wrapper
+                height: var(--space-bubble-diameter)
+                width: var(--space-bubble-diameter)
+                display: flex 
+                align-items: center
+                justify-content: center
+
+                .item-icon
+                    font-size: calc(var(--space-bubble-diameter) - var(--doubble-padding))
+
+            .item-name
+                display: flex
+                align-items: center
+
+                .item-name-content
+                    white-space: nowrap
+                    overflow: hidden
+                    text-overflow: ellipsis
+                    padding: var(--padding)
