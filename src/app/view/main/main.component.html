@@ -6,7 +6,7 @@
     </div>
     <div class="column-wrapper data-column">
         <div class="field-wrapper folder elevated">
-            folder
+            <app-overview></app-overview>
         </div>
         <div class="resizer" (pointerdown)="startResize($event)"></div>
     </div>
@@ -35,7 +35,7 @@
                 <app-spaces></app-spaces>
             </div>
             <div *ngIf="currentMainView === 'folder'" class="folder content-field elevated">
-                folder
+                <app-overview></app-overview>
             </div>
             <div *ngIf="currentMainView === 'files'" class="files content-field elevated">
                 files
@@ -59,7 +59,7 @@
             <app-spaces></app-spaces>
         </div>
         <div *ngIf="currentMainView === 'folder'" class="folder small-field-wrapper">
-            folder
+            <app-overview></app-overview>
         </div>
         <div *ngIf="currentMainView === 'files'" class="files small-field-wrapper">
             files

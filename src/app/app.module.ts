@@ -10,6 +10,7 @@ import { MainComponent } from './view/main/main.component';
 import { SpacesComponent } from './view/main/spaces/spaces.component';
 
 import { MatIconModule } from '@angular/material/icon';
+import { OverviewComponent } from './view/main/overview/overview.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { MatIconModule } from '@angular/material/icon';
     AppComponent,
     ViewComponent,
     MainComponent,
-    SpacesComponent
+    SpacesComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,

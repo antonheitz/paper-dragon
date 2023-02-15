@@ -14,10 +14,10 @@
         position: relative
 
         .field-wrapper
-            height: calc(100% - var(--doubble-padding))
-            width: calc(100% - var(--doubble-padding))
+            height: calc(100% - var(--doubble-internal-padding))
+            width: calc(100% - var(--doubble-internal-padding))
             border-radius: var(--corner-radius)
-            padding: var(--padding)
+            padding: var(--internal-padding)
             overflow: hidden
 
         .resizer
@@ -32,7 +32,7 @@
 
     .data-column
         width: 200px
-        min-width: calc(var(--doubble-padding) + var(--space-bubble-diameter))
+        min-width: calc(var(--doubble-internal-padding) + var(--space-bubble-diameter))
 
     .first-column
         padding-left: var(--padding)
@@ -60,7 +60,6 @@
         min-width: calc(var(--doubble-padding) + var(--doubble-padding) + var(--space-bubble-diameter))
 
         .header-wrapper
-            padding: var(--padding)
             width: calc(100% - var(--doubble-padding))
             padding: var(--padding)
             padding-bottom: 0
@@ -68,12 +67,11 @@
             .header-field
                 width: calc(100% - var(--doubble-padding))
                 border-radius: var(--corner-radius)
-                padding: var(--padding)
+                padding: var(--internal-padding)
 
         .content-wrapper
             display: flex
             flex-grow: 1
-            padding: var(--padding)
             width: calc(100% - var(--doubble-padding))
             padding: var(--padding)
             border-radius: var(--corner-radius)
@@ -81,7 +79,7 @@
             .content-field
                 width: calc(100% - var(--doubble-padding))
                 border-radius: var(--corner-radius)
-                padding: var(--padding)
+                padding: var(--internal-padding)
         
         .resizer
             height: calc(100% - var(--doubble-padding))
@@ -113,7 +111,7 @@
 
     .small-header
         width: calc(100% - var(--doubble-padding))
-        padding: var(--padding)
+        padding: var(--internal-padding)
 
     .small-content
         display: flex
@@ -121,7 +119,7 @@
     
         .small-field-wrapper
             width: 100%
-            padding: var(--padding)
+            padding: var(--internal-padding)
 
 .spaces
     /* fill this */

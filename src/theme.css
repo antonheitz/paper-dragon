@@ -2,8 +2,11 @@
     /* colors */
     --spaces-background-color: rgb(45, 45, 45);
     --spaces-text-color: rgb(255, 255, 255);
+
     --folder-background-color: rgb(60, 60, 60);
     --folder-text-color: rgb(255, 255, 255);
+    --folder-hover-color: rgb(75, 75, 75);
+
     --files-background-color: rgb(189, 189, 189);
     --files-text-color: rgb(0, 0, 0);
     --editor-background-color: rgb(255, 255, 255);
@@ -12,6 +15,7 @@
     /* spacing */
     --corner-radius: 10px;
     --padding: 5px;
+    --internal-padding: 10px;
 
     /* spaces */
     --space-bubble-diameter: 50px;
@@ -19,5 +23,6 @@
 
     /* calculated */
     --doubble-padding: calc(var(--padding) * 2);
+    --doubble-internal-padding: calc(var(--internal-padding) * 2);
     --shadow: 0px 0px var(--padding) rgba(0,0,0,0.4);
 }
