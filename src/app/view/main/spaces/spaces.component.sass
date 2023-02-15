@@ -36,8 +36,8 @@
                 height: var(--space-bubble-diameter)
                 width: var(--space-bubble-diameter)
                 border-radius: var(--space-bubble-radius)
-                background-color: var(--spaces-text-color)
-                color: var(--spaces-background-color)
+                background-color: var(--spaces-background-color)
+                color: var(--spaces-text-color)
                 font-size: 2rem   
 
             .space-name
@@ -63,31 +63,36 @@
                 align-items: center
                 justify-content: center
                 height: var(--space-bubble-diameter)
-                color: var(--spaces-text-color)
+                color: var(--spaces-background-color)
                 font-size: 2rem
                 width: 100%
     
     .bottom
-        color: var(--spaces-text-color)
+        color: var(--spaces-background-color)
 
         .item-wrapper
             padding-top: var(--padding)
+            width: 100%
             display: flex
-            flex-direction: row
+            justify-content: center
+            align-items: center
             
             &:hover
                 cursor: pointer
-
-            .item-icon
+            
+            .item-icon-wrapper
                 height: var(--space-bubble-diameter)
                 width: var(--space-bubble-diameter)
-                font-size: var(--space-bubble-diameter)
+                display: flex 
+                align-items: center
+                justify-content: center
+
+                .item-icon
+                    font-size: calc(var(--space-bubble-diameter) - var(--doubble-padding))
 
             .item-name
                 display: flex
-                flex-grow: 1
                 align-items: center
-                width: 0px
 
                 .item-name-content
                     white-space: nowrap

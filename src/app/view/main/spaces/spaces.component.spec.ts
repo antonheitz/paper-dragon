@@ -1,7 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatIconModule } from '@angular/material/icon';
-import { RuntimeStorageService } from 'src/app/services/runtime-storage.service';
-import { StateService } from 'src/app/services/state.service';
 
 import { SpacesComponent } from './spaces.component';
 
@@ -11,8 +8,7 @@ describe('SpacesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [ SpacesComponent, MatIconModule ],
-      imports: [ MatIconModule ]
+      declarations: [ SpacesComponent]
     })
     .compileComponents();
 

@@ -4,7 +4,7 @@
     </div>
     <div class="spaces-list">
         <div class="space-wrapper" *ngFor="let spaceConf of spaceConfs" (click)="openSpace(spaceConf._id)">
-            <div class="space-icon" title="{{spaceConf.name}}">
+            <div class="space-icon elevated" title="{{spaceConf.name}}">
                 {{spaceConf.name.charAt(0)}}
             </div>
             <div *ngIf="screenSize !== 'big'" class="space-name">
@@ -21,7 +21,9 @@
     </div>
     <div class="bottom">
         <div class="item-wrapper" (click)="openSettings()">
-            <mat-icon class="item-icon" title="Settings">settings</mat-icon>
+            <div class="item-icon-wrapper">
+                <span class="material-icons-outlined item-icon" title="Settings">&#xe8b8;</span>
+            </div>
             <div *ngIf="screenSize !== 'big'" class="item-name">
                 <div class="item-name-content">
                     Settings
