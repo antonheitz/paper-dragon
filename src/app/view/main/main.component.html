@@ -51,7 +51,7 @@
 </div>
 
 <div *ngIf="screenSize === 'small'" class="small-wrapper">
-    <div class="small-header">
+    <div class="small-header" *ngIf="currentMainView !== 'spaces'">
         Header
     </div>
     <div class="small-content">
