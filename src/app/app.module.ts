@@ -11,6 +11,7 @@ import { SpacesComponent } from './view/main/spaces/spaces.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { OverviewComponent } from './view/main/overview/overview.component';
+import { FolderComponent } from './view/main/overview/folder/folder.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { OverviewComponent } from './view/main/overview/overview.component';
     ViewComponent,
     MainComponent,
     SpacesComponent,
-    OverviewComponent
+    OverviewComponent,
+    FolderComponent
   ],
   imports: [
     BrowserModule,
