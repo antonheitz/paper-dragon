@@ -8,12 +8,12 @@ The only needed base software is Chrome.
 
 1. Open Chrome
 2. Navigate to your URL deployed to to in [this Guide](publish-pwa.md) or use the official main deployment:
-`https://antonheitz.github.io/targetnotes/`
-3. Click on the `Install targetnotes` button in the Adress Bar
+`https://antonheitz.github.io/paper-dragon/`
+3. Click on the `Install paper-dragon` button in the Adress Bar
 
 ## IOS
 
 1. Open Safari
 2. Navigate to your URL deployed to to in [this Guide](publish-pwa.md) or use the official main deployment:
-`https://antonheitz.github.io/targetnotes/`
+`https://antonheitz.github.io/paper-dragon/`
 3. klick on `share` and then on `add to home screen`

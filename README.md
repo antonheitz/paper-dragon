@@ -1,4 +1,4 @@
-# Targetnotes
+# Paper Dragon
 
 ## Project Philosophy
 
