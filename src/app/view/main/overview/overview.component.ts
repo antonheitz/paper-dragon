@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class OverviewComponent {
 
+  openAllNotes(): void {
+    console.log("open all notes")
+  }
+
+  openStarredNotes(): void {
+    console.log("open starred notes")
+  }
+
+  openDeletedNotes(): void {
+    console.log("open all notes")
+  }
+
 }

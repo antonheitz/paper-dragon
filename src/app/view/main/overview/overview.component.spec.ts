@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FolderComponent } from './folder/folder.component';
 
 import { OverviewComponent } from './overview.component';
 
@@ -8,7 +9,7 @@ describe('OverviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OverviewComponent ]
+      declarations: [ OverviewComponent, FolderComponent ]
     })
     .compileComponents();
 

@@ -1,0 +1,15 @@
+<div class="folder">
+    <div class="toggle-folder" (click)="toggleFolder()" [ngClass]="{'invisible': subFolders.length === 0}">
+        <span *ngIf="open" class="material-icons-outlined toggle-icon" title="expand">&#xe5ce;</span>
+        <span *ngIf="!open" class="material-icons-outlined toggle-icon" title="collapse">&#xe5cf;</span>
+    </div>
+    <div (click)="showFolderContent(folder.name)">
+        {{ folder.name }}
+    </div>
+</div>
+
+<div *ngIf="open">
+    <div *ngFor="let subFolder of subFolders" class="subfolder-wrapper">
+        <app-folder [folder]="subFolder"></app-folder>
+    </div>
+</div>

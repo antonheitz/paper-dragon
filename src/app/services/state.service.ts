@@ -43,4 +43,14 @@ export class StateService {
   getCurrentMainView(): CurrentMainView {
     return this.currentMainView;
   }
+
+  private currentSpaceId: string = "";
+
+  setCurrentSpaceId(spaceId: string): void {
+    this.currentSpaceId = spaceId;
+  }
+
+  getCurrentSpaceId(): string {
+    return this.currentSpaceId;
+  }
 }
