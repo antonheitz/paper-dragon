@@ -1,0 +1,55 @@
+.overview-wrapper
+    height: 100%
+    display: flex
+    flex-direction: column
+    white-space: nowrap
+    overflow-x: hidden
+    text-overflow: ellipsis
+    overflow-y: scroll
+    -ms-overflow-style: none
+    scrollbar-width: none
+
+    &::-webkit-scrollbar 
+        display: none
+
+    .top-wrapper
+        width: 100%
+        padding-top: var(--internal-padding)
+
+        .header-title
+            width: calc(100% - var(--doubble-internal-padding))
+            padding: var(--internal-padding)
+            padding-top: 0px
+
+            .title-text
+                font-weight: 500
+                width: 100%
+                border-bottom: 1px solid var(--folder-text-color)
+
+
+        .header-item
+            width: calc(100% - var(--doubble-internal-padding) - var(--internal-padding))
+            padding-left: var(--doubble-internal-padding)
+            padding-right: var(--internal-padding)
+
+            &:hover
+                cursor: pointer
+                background-color: var(--folder-hover-color)
+                border-radius: var(--corner-radius)
+
+    .folder-wrapper
+        flex-grow: 1
+        padding-top: var(--internal-padding)
+
+        .title
+            padding: var(--internal-padding)
+            padding-top: 0px
+            width: calc(100% - var(--doubble-internal-padding))
+
+            .title-text
+                font-weight: 500
+                width: 100%
+                border-bottom: 1px solid var(--folder-text-color)
+
+        
+        

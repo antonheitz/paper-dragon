@@ -1,4 +1,4 @@
-# Targetnotes
+# Paper Dragon
 
 ## Project Philosophy
 
@@ -22,10 +22,19 @@ This Notes app is made to solve some issues with the most open-source apps. Thes
 
  - **Contribution**: 
    
-   Anyone is more than welcome to contribute to this project as they like. Please keep discussions polite and strive for stable features!
+   Anyone is more than welcome to contribute to this project as they like. Please keep discussions polite and strive for stable features! Also please follow the [Contribution Rules](docs/contribution-rules.md).
 
-## Documentation Links
+## Documentation 
 
- - [Angular Basics](docs/angular.md)
- - [Publishing the PWA](docs/publish-pwa.md)
- - [Install the PWA](docs/install-pwa.md)
+For upcoming developments please see the current [Roadmap](docs/roadmap.md).
+
+### Basics
+
+ - [Angular Basics](docs/basics/angular.md)
+ - [Publishing the PWA](docs/basics/publish-pwa.md)
+ - [Install the PWA](docs/basics/install-pwa.md)
+
+### Deep Dive
+
+ - [High level Data Encryption & storage flow](docs/deep-dive/encryption.md)
+ - [Users and Workspaces](docs/deep-dive/users-and-workspaces.md)

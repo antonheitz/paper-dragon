@@ -19,6 +19,9 @@ jobs:
 
     - name: Install dependencies
       run: npm install
+    
+    - name: Test
+      run: npm run test:headless
 
     - name: Build
       run: npm run build:prod
@@ -28,5 +31,5 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: dist/targetnotes
+        publish_dir: dist/paper-dragon
         enable_jekyll: true

@@ -5,14 +5,23 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { ViewComponent } from './view/view.component';
+import { MainComponent } from './view/main/main.component';
+import { SpacesComponent } from './view/main/spaces/spaces.component';
+
+import { MatIconModule } from '@angular/material/icon';
+import { OverviewComponent } from './view/main/overview/overview.component';
+import { FolderComponent } from './view/main/overview/folder/folder.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ViewComponent,
+    MainComponent,
+    SpacesComponent,
+    OverviewComponent,
+    FolderComponent
   ],
   imports: [
     BrowserModule,
@@ -24,9 +33,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     }),
     BrowserAnimationsModule,
     // angular material
-    MatSlideToggleModule,
-    MatToolbarModule,
-    MatSidenavModule
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

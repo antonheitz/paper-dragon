@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "targetnotes": {
+    "paper-dragon": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,11 +17,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/targetnotes",
+            "outputPath": "dist/paper-dragon",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
-              "zone.js"
+              "zone.js",
+              "src/polyfills.ts"
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "sass",
@@ -32,11 +33,15 @@
             ],
             "styles": [
               "src/custom-theme.scss",
-              "src/styles.sass"
+              "src/styles.sass",
+              "src/theme.css"
             ],
             "scripts": [],
             "serviceWorker": true,
-            "ngswConfigPath": "ngsw-config.json"
+            "ngswConfigPath": "ngsw-config.json",
+            "allowedCommonJsDependencies": [
+              "pouchdb"
+           ]
           },
           "configurations": {
             "production": {
@@ -69,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "targetnotes:build:production"
+              "browserTarget": "paper-dragon:build:production"
             },
             "development": {
-              "browserTarget": "targetnotes:build:development"
+              "browserTarget": "paper-dragon:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +85,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "targetnotes:build"
+            "browserTarget": "paper-dragon:build"
           }
         },
         "test": {
@@ -88,7 +93,8 @@
           "options": {
             "polyfills": [
               "zone.js",
-              "zone.js/testing"
+              "zone.js/testing",
+              "src/polyfills.ts"
             ],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "sass",
@@ -98,7 +104,8 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.sass",
+              "src/theme.css"
             ],
             "scripts": []
           }
@@ -108,5 +115,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
