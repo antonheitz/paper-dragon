@@ -1,12 +1,12 @@
 {
-  "name": "targetnotes",
+  "name": "paper-dragon",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "build:prod": "ng build --configuration production --base-href https://antonheitz.github.io/targetnotes/",
+    "build:prod": "ng build --configuration production --base-href https://antonheitz.github.io/paper-dragon/",
     "test:headless": "ng test --watch=false --browsers=ChromeHeadless",
     "test": "ng test"
   },

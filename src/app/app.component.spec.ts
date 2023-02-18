@@ -17,17 +17,17 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'targetnotes'`, () => {
+  it(`should have as title 'paper-dragon'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('targetnotes');
+    expect(app.title).toEqual('paper-dragon');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('targetnotes app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('paper-dragon app is running!');
   });
 });
 */
