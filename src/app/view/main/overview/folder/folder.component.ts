@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { RuntimeFolder } from 'src/app/model/runtime/runtime-folder';
+import { RuntimeStorageService } from 'src/app/services/runtime-storage.service';
+import { StateService } from 'src/app/services/state.service';
 
 @Component({
   selector: 'app-folder',
@@ -18,6 +20,8 @@ export class FolderComponent {
     parent: ''
   }
 
+  constructor(private runtimeStorageService: RuntimeStorageService, private stateService: StateService) { }
+
   open: boolean = true;
 
   showFolderContent(name: string): void {
@@ -28,46 +32,11 @@ export class FolderComponent {
     this.open = !this.open;
   }
 
-  subFolders(): RuntimeFolder[] {
-    const allFolders: RuntimeFolder[] = [
-      {
-        type: 'folder',
-        decrypted: true,
-        _id: '1',
-        _rev: '',
-        encryptedKeys: ['name'],
-        name: "Subfolder 1",
-        parent: ''
-      },
-      {
-        type: 'folder',
-        decrypted: true,
-        _id: '2',
-        _rev: '',
-        encryptedKeys: ['name'],
-        name: "Subfolder 2",
-        parent: ''
-      },
-      {
-        type: 'folder',
-        decrypted: true,
-        _id: '3',
-        _rev: '',
-        encryptedKeys: ['name'],
-        name: "Subfolder 3",
-        parent: ''
-      }
-      ,
-      {
-        type: 'folder',
-        decrypted: true,
-        _id: '4',
-        _rev: '',
-        encryptedKeys: ['name'],
-        name: "Subfolder 4",
-        parent: '2'
-      }
-    ];
-    return allFolders.filter(item => item.parent === this.folder._id);
-  } 
+  get subFolders(): RuntimeFolder[] {
+    if (this.stateService.getCurrentSpaceId() === "") {
+      return [];
+    } else {
+      return this.runtimeStorageService.spaces[this.stateService.getCurrentSpaceId()].folder.filter(item => item.parent === this.folder._id);
+    }
+    } 
 }
