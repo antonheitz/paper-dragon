@@ -1,4 +1,7 @@
-<div class="view">
-    <app-locked *ngIf="!unlocked" [initialized]="initialized"></app-locked>
-    <app-main *ngIf="unlocked"></app-main>
+<div *ngIf="!unlocked" class="view">
+    <app-locked [initialized]="initialized"></app-locked>
+</div>
+
+<div *ngIf="unlocked" class="view">
+    <app-main></app-main>
 </div>
