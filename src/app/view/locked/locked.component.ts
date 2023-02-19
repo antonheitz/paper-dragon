@@ -43,4 +43,12 @@ export class LockedComponent {
   get doubblePwHash(): string {
     return this.runtimeStorage.spaces[this.runtimeStorage._getSpaceId()].spaceConf.pwDoubleHash;
   }
+
+  get registered(): boolean {
+    if (this.initialized) {
+      return this.doubblePwHash !== "";
+    } else {
+      return false;
+    }
+  }
 }
