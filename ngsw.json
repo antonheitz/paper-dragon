@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1676764359529,
+  "timestamp": 1676765376788,
   "index": "https://antonheitz.github.io/paper-dragon/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "https://antonheitz.github.io/paper-dragon/favicon.ico",
         "https://antonheitz.github.io/paper-dragon/index.html",
-        "https://antonheitz.github.io/paper-dragon/main.ee539c8b34823f3e.js",
+        "https://antonheitz.github.io/paper-dragon/main.c6af4d85b0db4ded.js",
         "https://antonheitz.github.io/paper-dragon/manifest.webmanifest",
         "https://antonheitz.github.io/paper-dragon/polyfills.4f80257c5cb47dc5.js",
         "https://antonheitz.github.io/paper-dragon/runtime.cbd322fa4778d9b0.js",
@@ -106,8 +106,8 @@
     "https://antonheitz.github.io/paper-dragon/assets/icons/92.png": "3d29a5fcbcad57b00ae90434bb7da9015b2a0434",
     "https://antonheitz.github.io/paper-dragon/assets/logo.svg": "eee007040e52b470d7ebd7a6f54794e2057c7d4c",
     "https://antonheitz.github.io/paper-dragon/favicon.ico": "0e06a073f48be2b955e394944ad1171dbec9c57d",
-    "https://antonheitz.github.io/paper-dragon/index.html": "78141d0cf6fe48d6af86ee716297c24bde269007",
-    "https://antonheitz.github.io/paper-dragon/main.ee539c8b34823f3e.js": "9a7f89434a43d38e06686a21881370db84ed8d91",
+    "https://antonheitz.github.io/paper-dragon/index.html": "275e28add79a8b452b91fa8ec05f4228b9f87768",
+    "https://antonheitz.github.io/paper-dragon/main.c6af4d85b0db4ded.js": "5b4dc9997d8cef49a577a096ad85fb04b6cec647",
     "https://antonheitz.github.io/paper-dragon/manifest.webmanifest": "3d696253f9c626f2821b3e492069c93a33cdac97",
     "https://antonheitz.github.io/paper-dragon/polyfills.4f80257c5cb47dc5.js": "9ce4e473fee15ede16b349b5bef90ed8088407cb",
     "https://antonheitz.github.io/paper-dragon/runtime.cbd322fa4778d9b0.js": "cfb531dba88a3077819b092ef1752b27baa20dd1",
