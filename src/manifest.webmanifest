@@ -1,8 +1,8 @@
 {
-  "name": "paper-dragon",
-  "short_name": "paper-dragon",
-  "theme_color": "#fafafa",
-  "background_color": "#fafafa",
+  "name": "Paper Dragon",
+  "short_name": "PDragon",
+  "theme_color": "#525252",
+  "background_color": "#525252",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
