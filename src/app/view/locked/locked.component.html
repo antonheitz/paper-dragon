@@ -1,0 +1,25 @@
+<div class="locked-wrapper" *ngIf="screenSize !== 'small'">
+    <div *ngIf="!initialized">
+        <img src="assets/logo.svg" class="splash">
+    </div>
+    <div class="login-card-wrapper">
+        <div class="application-icon">
+            <img src="assets/logo.svg" class="icon-image">
+        </div>
+        <app-login [doubblePwHash]="doubblePwHash" *ngIf="registered"></app-login>
+        <app-register *ngIf="!registered"></app-register>
+    </div>
+</div>
+
+<div class="locked-wrapper-small" *ngIf="screenSize === 'small'">
+    <div *ngIf="!initialized">
+        <img src="assets/logo.svg" class="splash">
+    </div>
+    <div class="login-card-wrapper">
+        <div class="application-icon">
+            <img src="assets/logo.svg" class="icon-image">
+        </div>
+        <app-login [doubblePwHash]="doubblePwHash" *ngIf="registered"></app-login>
+        <app-register *ngIf="!registered"></app-register>
+    </div>
+</div>

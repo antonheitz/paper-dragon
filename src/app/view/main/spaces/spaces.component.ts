@@ -10,9 +10,7 @@ import { ScreenSize, StateService } from 'src/app/services/state.service';
 })
 export class SpacesComponent {
 
-  constructor(private stateService: StateService, private runtimeStorage: RuntimeStorageService) {
-    this.runtimeStorage.init().then(() => {})
-  }
+  constructor(private stateService: StateService, private runtimeStorage: RuntimeStorageService) { }
 
   get screenSize(): ScreenSize {
     return this.stateService.getScreenSize();

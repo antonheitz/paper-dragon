@@ -1,7 +1,9 @@
 :root {
+
     /* colors */
-    --spaces-background-color: rgb(45, 45, 45);
-    --spaces-text-color: rgb(255, 255, 255);
+    --text-color: rgb(45, 45, 45);
+    --background-color: rgb(255, 255, 255);
+    --hover-color: rgb(130, 130, 130);
 
     --folder-background-color: rgb(60, 60, 60);
     --folder-text-color: rgb(255, 255, 255);

@@ -1,0 +1,57 @@
+.register-card
+    border-radius: var(--corner-radius)
+    background-color: var(--text-color)
+    color: var(--background-color)
+
+    .selector
+        display: flex
+        flex-direction: row
+        justify-content: space-evenly
+        
+        .selector-item
+            padding: var(--internal-padding)
+            width: 100%
+            text-align: center
+            font-weight: 300
+
+            &:hover
+                cursor: pointer
+                background-color: var(--hover-color)
+
+        .left
+            border-top-left-radius: var(--corner-radius)
+
+        .right
+            border-top-right-radius: var(--corner-radius)
+
+        .selected
+            font-weight: 500
+
+    .content
+        padding: var(--internal-padding)
+
+        .password-input
+            border: none
+            color: var(--background-color)
+            width: 100%
+            background-color: var(--text-color)
+
+            &:focus
+                outline: none
+
+        .register-item
+            padding-bottom: var(--internal-padding)
+
+        .register-button
+            padding: var(--internal-padding)
+            display: flex
+            align-items: center
+            justify-content: center
+            border-radius: var(--corner-radius)
+
+            &:hover
+                background-color: var(--hover-color)
+                cursor: pointer
+
+        .error
+            color: red

@@ -1,0 +1,35 @@
+<div class="register-card">
+    <div class="selector">
+        <div class="selector-item left" (click)="select('local')" [ngClass]="{'selected': currentItem === 'local'}">
+            Local
+        </div>
+        <div class="selector-item right" (click)="select('remote')" [ngClass]="{'selected': currentItem === 'remote'}">
+            Remote
+        </div>
+    </div>
+    <div class="content">
+        <div *ngIf="currentItem === 'local'">
+            <div class="register-item">
+                Choose a Password:
+            </div>
+            <div class="register-item">
+                <input type="password" class="password-input" (change)="onPasswordInputChange()" [(ngModel)]="clearPassword" placeholder="Password" />
+            </div>
+            <div class="register-item">
+                Confirm Password:
+            </div>
+            <div class="register-item">
+                <input type="password" class="password-input" (change)="onPasswordInputChange()" [(ngModel)]="clearPasswordConfirm" placeholder="Password" />
+            </div>
+            <div class="register-item error" *ngIf="localErrorMessage.length > 0">
+                {{ localErrorMessage }}
+            </div>
+            <div class="register-button" (click)="registerLocal()">
+                Register
+            </div>
+        </div>
+        <div *ngIf="currentItem === 'remote'">
+            Remote not available yet
+        </div>
+    </div>
+</div>
