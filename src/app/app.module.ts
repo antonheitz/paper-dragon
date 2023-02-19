@@ -14,6 +14,8 @@ import { OverviewComponent } from './view/main/overview/overview.component';
 import { FolderComponent } from './view/main/overview/folder/folder.component';
 import { LockedComponent } from './view/locked/locked.component';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './view/locked/login/login.component';
+import { RegisterComponent } from './view/locked/register/register.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { FormsModule } from '@angular/forms';
     SpacesComponent,
     OverviewComponent,
     FolderComponent,
-    LockedComponent
+    LockedComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

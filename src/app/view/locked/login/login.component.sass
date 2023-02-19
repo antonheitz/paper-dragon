@@ -1,0 +1,31 @@
+.login-card
+    padding: var(--internal-padding)
+    border-radius: var(--corner-radius)
+    background-color: var(--text-color)
+    color: var(--background-color)
+
+    .password-wrapper
+        display: flex
+        flex-direction: row
+
+        .password-input
+            background-color: var(--text-color)
+            border: none
+            color: var(--background-color)
+            flex-grow: 1
+
+            &:focus
+                outline: none
+
+    .error
+        color: rgb(246, 0, 0)
+    
+    .hint
+        padding-top: var(--internal-padding)
+
+        .hint-title
+            font-weight: 500
+            border-bottom: 1px solid var(--background-color)
+
+        .hint-content
+            padding-top: var(--internal-padding)
