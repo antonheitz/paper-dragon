@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CryptoService } from 'src/app/services/crypto.service';
 import { RuntimeStorageService } from 'src/app/services/runtime-storage.service';
 
@@ -8,6 +8,8 @@ import { RuntimeStorageService } from 'src/app/services/runtime-storage.service'
   styleUrls: ['./locked.component.sass']
 })
 export class LockedComponent {
+
+  @Input("initialized") initialized: boolean = false;
 
   clearPassword: string = "";
   error: boolean = false;
@@ -26,7 +28,7 @@ export class LockedComponent {
           this.runtimeStorage.decryptSpace(passwordHash)
         } else {
           this.error = true;
-          this.errorMessage = "The password was not right!";
+          this.errorMessage = "The password is not right!";
         }
       }).catch((err: Error) => {
         this.error = true;

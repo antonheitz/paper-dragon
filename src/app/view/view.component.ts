@@ -16,11 +16,11 @@ export class ViewComponent {
     })
   }
 
-  get locked(): boolean {
+  get unlocked(): boolean {
     if (!this.initialized) {
       return false;
     } else {
-      return !this.runtimeStorage.spaces[this.runtimeStorage._getSpaceId()].spaceConf.decrypted;
+      return this.runtimeStorage.spaces[this.runtimeStorage._getSpaceId()].spaceConf.decrypted;
     }
   }
 }

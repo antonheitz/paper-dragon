@@ -1,5 +1,8 @@
 <div class="locked-wrapper">
-    <div class="login-card-wrapper">
+    <div *ngIf="!initialized">
+        <img src="assets/logo.svg" class="splash">
+    </div>
+    <div *ngIf="initialized" class="login-card-wrapper">
         <div class="application-icon">
             <img src="assets/logo.svg" class="icon-image">
         </div>
