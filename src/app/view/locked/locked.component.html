@@ -1,0 +1,22 @@
+<div class="locked-wrapper">
+    <div class="login-card-wrapper">
+        <div class="application-icon">
+            <img src="assets/logo.svg" class="icon-image">
+        </div>
+        <div class="login-card">
+            <div class="password-wrapper">
+                <input type="password" class="password-input" [(ngModel)]="clearPassword" placeholder="Password" (keyup.enter)="attemptLogin()"/>
+                <div class="item-icon-wrapper" (click)="attemptLogin()">
+                    <span class="material-icons-outlined item-icon" title="Settings">&#xe5c8;</span>
+                </div>
+            </div>
+            <div *ngIf="error" class="error">
+                {{ errorMessage }}
+            </div>
+            <div class="hint">
+                <div class="hint-title">Hint:</div>
+                <div class="hint-content">the hint goes here</div>
+            </div>
+        </div>
+    </div>
+</div>

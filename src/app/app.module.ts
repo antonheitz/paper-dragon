@@ -12,6 +12,8 @@ import { SpacesComponent } from './view/main/spaces/spaces.component';
 import { MatIconModule } from '@angular/material/icon';
 import { OverviewComponent } from './view/main/overview/overview.component';
 import { FolderComponent } from './view/main/overview/folder/folder.component';
+import { LockedComponent } from './view/locked/locked.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { FolderComponent } from './view/main/overview/folder/folder.component';
     MainComponent,
     SpacesComponent,
     OverviewComponent,
-    FolderComponent
+    FolderComponent,
+    LockedComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +35,7 @@ import { FolderComponent } from './view/main/overview/folder/folder.component';
       registrationStrategy: 'registerWhenStable:30000'
     }),
     BrowserAnimationsModule,
+    FormsModule,
     // angular material
     MatIconModule
   ],
