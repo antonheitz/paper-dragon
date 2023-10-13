@@ -5,6 +5,7 @@ import { LockedComponent } from './locked/locked.component';
 import { MainComponent } from './main/main.component';
 
 import { ViewComponent } from './view.component';
+import { RegisterComponent } from './locked/register/register.component';
 
 describe('ViewComponent', () => {
   let component: ViewComponent;
@@ -12,10 +13,11 @@ describe('ViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [ ViewComponent, MainComponent, LockedComponent ],
-      imports: [ CommonModule, FormsModule ]
+      declarations: [ViewComponent, MainComponent, LockedComponent, RegisterComponent],
+      providers: [],
+      imports: [CommonModule, FormsModule]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ViewComponent);
     component = fixture.componentInstance;
