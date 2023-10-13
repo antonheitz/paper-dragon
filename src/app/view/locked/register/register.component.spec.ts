@@ -10,10 +10,11 @@ describe('RegisterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegisterComponent ],
-      imports: [ FormsModule, CommonModule ]
+      declarations: [RegisterComponent],
+      providers: [],
+      imports: [FormsModule, CommonModule]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
