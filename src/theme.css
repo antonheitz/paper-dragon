@@ -2,6 +2,7 @@
 
     /* colors */
     --text-color: rgb(45, 45, 45);
+    --error-text-color: rgb(239, 31, 31);
     --background-color: rgb(255, 255, 255);
     --hover-color: rgb(130, 130, 130);
 
