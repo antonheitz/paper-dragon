@@ -5,9 +5,9 @@
     --background-color: rgb(255, 255, 255);
     --hover-color: rgb(130, 130, 130);
 
-    --folder-background-color: rgb(60, 60, 60);
-    --folder-text-color: rgb(255, 255, 255);
-    --folder-hover-color: rgb(75, 75, 75);
+    --notes-background-color: rgb(60, 60, 60);
+    --notes-text-color: rgb(255, 255, 255);
+    --notes-hover-color: rgb(75, 75, 75);
 
     --files-background-color: rgb(189, 189, 189);
     --files-text-color: rgb(0, 0, 0);
@@ -26,5 +26,5 @@
     /* calculated */
     --doubble-padding: calc(var(--padding) * 2);
     --doubble-internal-padding: calc(var(--internal-padding) * 2);
-    --shadow: 0px 0px var(--padding) rgba(0,0,0,0.4);
+    --shadow: 0px 0px var(--padding) rgba(0, 0, 0, 0.4);
 }

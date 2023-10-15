@@ -1,28 +1,15 @@
 <div class="overview-wrapper">
-    <div class="top-wrapper">
-        <div class="header-title">
+    <div class="notes-wrapper">
+        <div class="notes-title">
             <div class="title-text">
-                General
+                Notes
             </div>
         </div>
-        <div class="header-item">
-            All notes
+        <div *ngFor="let note of notes" class="notes-item">
+            {{ note.name }}
         </div>
-        <div class="header-item">
-            Starred
-        </div>
-        <div class="header-item">
-            Trash
-        </div>
-    </div>
-    <div class="folder-wrapper">
-        <div class="title">
-            <div class="title-text">
-                Folder
-            </div>
-        </div>
-        <div class="content">
-            <app-folder></app-folder>
+        <div *ngIf="notes.length === 0" class="notes-empty">
+            No Notes yet. Add one!
         </div>
     </div>
 </div>

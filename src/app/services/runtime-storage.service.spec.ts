@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { RuntimeDocument } from '../model/runtime-document';
-import { RuntimeNote } from '../model/runtime/runtime-note';
-import { RuntimeStorageService, Space } from './runtime-storage.service';
+import { RuntimeEntry } from '../model/runtime/runtime-entry';
+import { RuntimeStorageService } from './runtime-storage.service';
+import { Space } from '../model/space';
 
 describe('RuntimeStorageService', () => {
   let service: RuntimeStorageService;
@@ -25,26 +26,26 @@ describe('RuntimeStorageService', () => {
     service.updateDocument(personalSpace.spaceConf);
     // decrypt
     await service.decryptSpace(pwHash);
-    expect(service.space().notes.length).toBe(0);
-    const loadedNote: RuntimeNote = {
-      name: "New Note",
-      folderId: "parent-folder-id",
+    expect(service.space().entries.length).toBe(0);
+    const loadedEntry: RuntimeEntry = {
+      title: "New Entry",
+      noteId: "parent-note-id",
       content: "",
-      type: "note",
-      encryptedKeys: ["name", "content"],
+      type: "entry",
+      encryptedKeys: ["title", "content"],
       decrypted: true,
       _id: "newly-added",
       _rev: "newly-added"
     }
-    const addedDocument: RuntimeDocument = await service.createDocument(loadedNote);
-    expect(service.space().notes.length).toBe(1);
+    const addedDocument: RuntimeDocument = await service.createDocument(loadedEntry);
+    expect(service.space().entries.length).toBe(1);
     // edit and save document
-    loadedNote.content = "Hello there, General Kenobi!";
-    await service.updateDocument(loadedNote);
-    expect(service.space().notes.length).toBe(1);
+    loadedEntry.content = "Hello there, General Kenobi!";
+    await service.updateDocument(loadedEntry);
+    expect(service.space().entries.length).toBe(1);
     // delete document
-    await service.deleteDocument(loadedNote);
-    expect(service.space().notes.length).toBe(0);
+    await service.deleteDocument(loadedEntry);
+    expect(service.space().entries.length).toBe(0);
     // test space actions
     const newSpaceName: string = "Test space";
     const newSpaceId: string = await service.createSpace(newSpaceName);

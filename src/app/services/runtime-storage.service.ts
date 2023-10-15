@@ -2,23 +2,14 @@ import { Injectable, resolveForwardRef } from '@angular/core';
 import { EncryptedDocument } from '../model/base-document';
 import { RuntimeDocument } from '../model/runtime-document';
 import { RuntimeFile } from '../model/runtime/runtime-file';
-import { RuntimeFolder } from '../model/runtime/runtime-folder';
 import { RuntimeNote } from '../model/runtime/runtime-note';
+import { RuntimeEntry } from '../model/runtime/runtime-entry';
 import { RuntimeRemoteWorkspace } from '../model/runtime/runtime-remote-workspace';
 import { RuntimeSpaceConf } from '../model/runtime/runtime-space-conf';
 import { RuntimeUserConf } from '../model/runtime/runtime-user-conf';
 import { CryptoService } from './crypto.service';
 import { PersistentStorageService, PERSONAL_WORKSPACE_NAME } from './persistent-storage.service';
-
-export interface Space {
-  userConf: RuntimeUserConf[],
-  spaceConf: RuntimeSpaceConf,
-  remoteSpaces: RuntimeRemoteWorkspace[],
-  folder: RuntimeFolder[],
-  notes: RuntimeNote[],
-  files: RuntimeFile[]
-}
-
+import { Space } from '../model/space';
 
 @Injectable({
   providedIn: 'root'
@@ -114,8 +105,8 @@ export class RuntimeStorageService {
         _rev: "not loaded"
       },
       remoteSpaces: [],
-      folder: [],
       notes: [],
+      entries: [],
       files: []
     };
     documents.forEach((document: EncryptedDocument) => {
@@ -161,26 +152,11 @@ export class RuntimeStorageService {
           newSpace.remoteSpaces.push(loadedWorkspace);
           break;
         }
-        case 'folder': {
-          const loadedFolder: RuntimeFolder = {
-            name: document.name,
-            parent: document.parent,
-            type: document.type,
-            encryptedKeys: ["name"],
-            decrypted: false,
-            _id: document._id,
-            _rev: document._rev
-          }
-          newSpace.folder.push(loadedFolder);
-          break;
-        }
         case 'note': {
           const loadedNote: RuntimeNote = {
             name: document.name,
-            folderId: document.folderId,
-            content: document.content,
             type: document.type,
-            encryptedKeys: ["name", "content"],
+            encryptedKeys: ["name"],
             decrypted: false,
             _id: document._id,
             _rev: document._rev
@@ -188,10 +164,24 @@ export class RuntimeStorageService {
           newSpace.notes.push(loadedNote);
           break;
         }
+        case 'entry': {
+          const loadedEntry: RuntimeEntry = {
+            title: document.title,
+            noteId: document.noteId,
+            content: document.content,
+            type: document.type,
+            encryptedKeys: ["title", "content"],
+            decrypted: false,
+            _id: document._id,
+            _rev: document._rev
+          }
+          newSpace.entries.push(loadedEntry);
+          break;
+        }
         case 'file': {
           const loadedFile: RuntimeFile = {
             name: document.name,
-            folderId: document.folderId,
+            entryId: document.entryId,
             content: document.content,
             type: document.type,
             encryptedKeys: ["name", "content"],
@@ -247,11 +237,11 @@ export class RuntimeStorageService {
       await this.loadSpace(remoteSpace._id);
       await this.decryptSpace(remoteSpace.pwHash, remoteSpace._id);
     });
-    selectedSpace.folder.forEach(async (folder: RuntimeFolder) => {
-      await this.cryptoService.decryptRuntimeDocument(folder, secret);
-    });
     selectedSpace.notes.forEach(async (note: RuntimeNote) => {
       await this.cryptoService.decryptRuntimeDocument(note, secret);
+    });
+    selectedSpace.entries.forEach(async (entry: RuntimeEntry) => {
+      await this.cryptoService.decryptRuntimeDocument(entry, secret);
     });
     selectedSpace.files.forEach(async (file: RuntimeFile) => {
       await this.cryptoService.decryptRuntimeDocument(file, secret);
@@ -296,12 +286,12 @@ export class RuntimeStorageService {
         usedSpace.remoteSpaces.push(document);
         break;
       }
-      case "folder": {
-        usedSpace.folder.push(document);
-        break;
-      }
       case "note": {
         usedSpace.notes.push(document);
+        break;
+      }
+      case "entry": {
+        usedSpace.entries.push(document);
         break;
       }
       case "file": {
@@ -309,7 +299,7 @@ export class RuntimeStorageService {
         break;
       }
       default: {
-        throw new Error(`Unhandled note type ${document.type}`);
+        throw new Error(`Unhandled document type ${document.type}`);
       }
     }
     const newDoc: EncryptedDocument = await this.cryptoService.toStorageDocument(document, usedSpace.spaceConf.pwHash);
@@ -356,15 +346,15 @@ export class RuntimeStorageService {
         });
         break;
       }
-      case "folder": {
-        usedSpace.folder = usedSpace.folder.filter((folderDoc: RuntimeFolder) => {
-          return document._id !== folderDoc._id;
-        });
-        break;
-      }
       case "note": {
         usedSpace.notes = usedSpace.notes.filter((noteDoc: RuntimeNote) => {
           return document._id !== noteDoc._id;
+        });
+        break;
+      }
+      case "entry": {
+        usedSpace.entries = usedSpace.entries.filter((entryDoc: RuntimeEntry) => {
+          return document._id !== entryDoc._id;
         });
         break;
       }
@@ -375,7 +365,7 @@ export class RuntimeStorageService {
         break;
       }
       default: {
-        throw new Error(`Unhandled note type ${document.type}`);
+        throw new Error(`Unhandled document type ${document.type}`);
       }
     }
     // delete from persistent storage

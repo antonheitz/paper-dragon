@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { EncryptedDocument } from '../model/base-document';
 import { RuntimeFile } from '../model/runtime/runtime-file';
-import { RuntimeFolder } from '../model/runtime/runtime-folder';
 import { RuntimeNote } from '../model/runtime/runtime-note';
+import { RuntimeEntry } from '../model/runtime/runtime-entry';
 import { RuntimeRemoteWorkspace } from '../model/runtime/runtime-remote-workspace';
 import { RuntimeUserConf } from '../model/runtime/runtime-user-conf';
 import { EncryptedFile } from '../model/storage/encrypted-file';
-import { EncryptedFolder } from '../model/storage/encrypted-folder';
 import { EncryptedNote } from '../model/storage/encrypted-note';
+import { EncryptedEntry } from '../model/storage/encrypted-entry';
 import { EncryptedRemoteWorkspace } from '../model/storage/encrypted-remote-workspace';
 import { EncryptedUserConf } from '../model/storage/encrypted-user-conf';
 
@@ -84,41 +84,40 @@ describe('CryptoService', () => {
     const encryptedWorkspace: EncryptedDocument = await service.toStorageDocument(loadedWorkspace, secret);
     expect(service.decrypt((encryptedWorkspace as EncryptedRemoteWorkspace).remoteConfig, secret)).toBe(clearString1);
     expect(service.decrypt((encryptedWorkspace as EncryptedRemoteWorkspace).pwHash, secret)).toBe(clearString2);
-    // folder
-    const loadedFolder: RuntimeFolder = {
-      name: encryptedString1,
-      parent: "this-parent-id",
-      type: "folder",
-      encryptedKeys: ["name"],
-      decrypted: false,
-      _id: "test-folder-id",
-      _rev: "test-folder-rev"
-    }
-    await service.decryptRuntimeDocument(loadedFolder, secret);
-    expect(loadedFolder.name).toBe(clearString1);
-    const encryptedFolder: EncryptedDocument = await service.toStorageDocument(loadedFolder, secret);
-    expect(service.decrypt((encryptedFolder as EncryptedFolder).name, secret)).toBe(clearString1);
-    // Note 
+    // Note
     const loadedNote: RuntimeNote = {
       name: encryptedString1,
-      folderId: "parent-folder-id",
-      content: encryptedString2,
       type: "note",
-      encryptedKeys: ["name", "content"],
+      encryptedKeys: ["name"],
       decrypted: false,
       _id: "test-note-id",
       _rev: "test-note-rev"
     }
     await service.decryptRuntimeDocument(loadedNote, secret);
     expect(loadedNote.name).toBe(clearString1);
-    expect(loadedNote.content).toBe(clearString2);
     const encryptedNote: EncryptedDocument = await service.toStorageDocument(loadedNote, secret);
     expect(service.decrypt((encryptedNote as EncryptedNote).name, secret)).toBe(clearString1);
-    expect(service.decrypt((encryptedNote as EncryptedNote).content, secret)).toBe(clearString2);
+    // Entry 
+    const loadedEntry: RuntimeEntry = {
+      title: encryptedString1,
+      noteId: "parent-note-id",
+      content: encryptedString2,
+      type: "entry",
+      encryptedKeys: ["title", "content"],
+      decrypted: false,
+      _id: "test-entry-id",
+      _rev: "test-entry-rev"
+    }
+    await service.decryptRuntimeDocument(loadedEntry, secret);
+    expect(loadedEntry.title).toBe(clearString1);
+    expect(loadedEntry.content).toBe(clearString2);
+    const encryptedEntry: EncryptedDocument = await service.toStorageDocument(loadedEntry, secret);
+    expect(service.decrypt((encryptedEntry as EncryptedEntry).title, secret)).toBe(clearString1);
+    expect(service.decrypt((encryptedEntry as EncryptedEntry).content, secret)).toBe(clearString2);
     // file
     const loadedFile: RuntimeFile = {
       name: encryptedString1,
-      folderId: "parent-folder-id",
+      entryId: "parent-entry-id",
       content: encryptedString2,
       type: "file",
       encryptedKeys: ["name", "content"],

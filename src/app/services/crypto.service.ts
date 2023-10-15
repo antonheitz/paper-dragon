@@ -7,8 +7,8 @@ import { EncryptedDocument } from '../model/base-document';
 import { EncryptedUserConf } from '../model/storage/encrypted-user-conf';
 import { EncryptedSpaceConf } from '../model/storage/encrypted-space-conf';
 import { EncryptedRemoteWorkspace } from '../model/storage/encrypted-remote-workspace';
-import { EncryptedFolder } from '../model/storage/encrypted-folder';
 import { EncryptedNote } from '../model/storage/encrypted-note';
+import { EncryptedEntry } from '../model/storage/encrypted-entry';
 import { EncryptedFile } from '../model/storage/encrypted-file';
 
 export interface MessageTuples {
@@ -107,13 +107,13 @@ export class CryptoService {
           document.decrypted = true;
           break;
         }
-        case 'folder': {
+        case 'note': {
           document.name = this.decrypt(document.name, secret);
           document.decrypted = true;
           break;
         }
-        case 'note': {
-          document.name = this.decrypt(document.name, secret);
+        case 'entry': {
+          document.title = this.decrypt(document.title, secret);
           document.content = this.decrypt(document.content, secret);
           document.decrypted = true;
           break;
@@ -181,39 +181,38 @@ export class CryptoService {
         }
         return encryptedRemoteWorkspace;
       }
-      case 'folder': {
-        const encryptedFolder: EncryptedFolder = {
-          name: document.name,
-          parent: document.parent,
-          type: "folder",
-          _id: document._id,
-          _rev: document._rev
-        }
-        if (document.decrypted) {
-          encryptedFolder.name = this.encrypt(encryptedFolder.name, secret);
-        }
-        return encryptedFolder;
-      }
       case 'note': {
         const encryptedNote: EncryptedNote = {
           name: document.name,
-          content: document.content,
-          folderId: document.folderId,
           type: "note",
           _id: document._id,
           _rev: document._rev
         }
         if (document.decrypted) {
           encryptedNote.name = this.encrypt(encryptedNote.name, secret);
-          encryptedNote.content = this.encrypt(encryptedNote.content, secret);
         }
         return encryptedNote;
+      }
+      case 'entry': {
+        const encryptedEntry: EncryptedEntry = {
+          title: document.title,
+          content: document.content,
+          noteId: document.noteId,
+          type: "entry",
+          _id: document._id,
+          _rev: document._rev
+        }
+        if (document.decrypted) {
+          encryptedEntry.title = this.encrypt(encryptedEntry.title, secret);
+          encryptedEntry.content = this.encrypt(encryptedEntry.content, secret);
+        }
+        return encryptedEntry;
       }
       case 'file': {
         const encryptedFile: EncryptedFile = {
           name: document.name,
           content: document.content,
-          folderId: document.folderId,
+          entryId: document.entryId,
           type: "file",
           _id: document._id,
           _rev: document._rev

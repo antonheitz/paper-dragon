@@ -2,14 +2,14 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
 
 export type ScreenSize = "big" | "medium" | "small";
-export type CurrentMainView = "spaces" | "folder" | "files" | "editor"
+export type CurrentMainView = "spaces" | "notes" | "entries" | "editor"
 
 @Injectable({
   providedIn: 'root'
 })
 export class StateService {
 
-  constructor(private observer: BreakpointObserver) { 
+  constructor(private observer: BreakpointObserver) {
     // Screen size breakpoints
     const bigBreakpoint: string = '(max-width: 900px)';
     const mediumBreakpoint: string = '(max-width: 450px)';
