@@ -16,6 +16,7 @@ export class RegisterComponent {
   clearPassword: string = "";
   clearPasswordConfirm: string = "";
   localErrorMessage: string = "";
+  hint: string = "";
 
   constructor(private runtimeStorageService: RuntimeStorageService, private cryptoService: CryptoService) { }
 
@@ -37,6 +38,7 @@ export class RegisterComponent {
       const doubbleHashedPassword: string = await this.cryptoService.hashString(hashedPassword);
       const personalSpaceConf: RuntimeSpaceConf = this.runtimeStorageService.spaces[this.runtimeStorageService._getSpaceId()].spaceConf;
       personalSpaceConf.pwDoubleHash = doubbleHashedPassword;
+      personalSpaceConf.pwHint = this.hint;
       this.localErrorMessage = "";
       await this.runtimeStorageService.updateDocument(personalSpaceConf);
     }

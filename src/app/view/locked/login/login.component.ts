@@ -10,6 +10,7 @@ import { RuntimeStorageService } from 'src/app/services/runtime-storage.service'
 export class LoginComponent {
 
   @Input('doubblePwHash') doubblePwHash: string = "";
+  @Input('pwHint') pwHint: string = "";
 
   clearPassword: string = "";
   error: boolean = false;

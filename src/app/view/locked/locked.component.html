@@ -6,7 +6,7 @@
         <div class="application-icon">
             <img src="assets/logo.svg" class="icon-image">
         </div>
-        <app-login [doubblePwHash]="doubblePwHash" *ngIf="registered"></app-login>
+        <app-login [doubblePwHash]="doubblePwHash" [pwHint]="pwHint" *ngIf="registered"></app-login>
         <app-register *ngIf="!registered"></app-register>
     </div>
 </div>
