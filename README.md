@@ -1,5 +1,7 @@
 # Paper Dragon
 
+Notes can be very private and seek for the necessary secure storage. The PWA is ment to work offline and cross-server, private and cooperative, lightweight and secure. Try it out [here](https://antonheitz.github.io/paper-dragon/).
+
 ## Project Philosophy
 
 This Notes app is made to solve some issues with the most open-source apps. These are:
