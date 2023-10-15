@@ -9,17 +9,25 @@
     </div>
     <div class="content">
         <div *ngIf="currentItem === 'local'">
-            <div class="register-item">
+            <div class="register-item resgister-item-header">
                 Choose a Password:
             </div>
             <div class="register-item">
-                <input type="password" class="password-input" (change)="onPasswordInputChange()" [(ngModel)]="clearPassword" placeholder="Password" />
+                <input type="password" class="password-input" (change)="onPasswordInputChange()"
+                    [(ngModel)]="clearPassword" placeholder="Password" />
             </div>
-            <div class="register-item">
+            <div class="register-item resgister-item-header">
                 Confirm Password:
             </div>
             <div class="register-item">
-                <input type="password" class="password-input" (change)="onPasswordInputChange()" [(ngModel)]="clearPasswordConfirm" placeholder="Password" />
+                <input type="password" class="password-input" (change)="onPasswordInputChange()"
+                    [(ngModel)]="clearPasswordConfirm" placeholder="Password" />
+            </div>
+            <div class="register-item resgister-item-header">
+                Provide a Password Hint:
+            </div>
+            <div class="register-item">
+                <input type="text" class="password-input" [(ngModel)]="hint" placeholder="Hint" />
             </div>
             <div class="register-item error" *ngIf="localErrorMessage.length > 0">
                 {{ localErrorMessage }}

@@ -18,6 +18,10 @@ export class LockedComponent {
     return this.runtimeStorage.spaces[this.runtimeStorage._getSpaceId()].spaceConf.pwDoubleHash;
   }
 
+  get pwHint(): string {
+    return this.runtimeStorage.spaces[this.runtimeStorage._getSpaceId()].spaceConf.pwHint;
+  }
+
   get registered(): boolean {
     if (this.initialized) {
       return this.doubblePwHash !== "";
