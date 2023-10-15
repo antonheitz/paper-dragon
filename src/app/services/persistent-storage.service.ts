@@ -48,22 +48,15 @@ export class PersistentStorageService {
    * @param spaceId 
    * @returns PouchDB Object
    */
-  _selectSpace(spaceId: string | undefined): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.workspaces().then((workspaces: { [workspaceId: string]: any; }) => {
-        if (typeof spaceId !== 'undefined') {
-          if (Object.keys(workspaces).includes(spaceId)) {
-            resolve(workspaces[spaceId]);
-          } else {
-            reject("Space not found");
-          }
-        } else {
-          resolve(workspaces[PERSONAL_WORKSPACE_NAME]);
-        }
-      }).catch((err: Error) => {
-        reject(err);
-      });
-    });
+  async _selectSpace(spaceId: string | undefined): Promise<any> {
+    const workspaces = await this.workspaces();
+    if (typeof spaceId === 'undefined') {
+      return workspaces[PERSONAL_WORKSPACE_NAME];
+    }
+    if (!Object.keys(workspaces).includes(spaceId)) {
+      throw new Error(`Space ${spaceId} not found.`)
+    }
+    return workspaces[spaceId];
   }
 
   /**
@@ -71,22 +64,16 @@ export class PersistentStorageService {
    * 
    * @returns 
    */
-  _loadWorkspaces(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.workspaceRegistry.allDocs({
-        include_docs: true,
-        attachments: true
-      }).then((result: any) => {
-        this._workspaces = {};
-        result.rows.map((row: any) => {
-          return row.doc;
-        }).forEach((registeredWorkspace: RegisteredWorkspace) => {
-          this._workspaces[registeredWorkspace.userWorkspaceId] = this._openDb(registeredWorkspace._id);
-        });
-        resolve();
-      }).catch((err: Error) => {
-        reject(err);
-      });
+  async _loadWorkspaces(): Promise<void> {
+    const result = await this.workspaceRegistry.allDocs({
+      include_docs: true,
+      attachments: true
+    });
+    this._workspaces = {};
+    result.rows.map((row: any) => {
+      return row.doc;
+    }).forEach((registeredWorkspace: RegisteredWorkspace) => {
+      this._workspaces[registeredWorkspace.userWorkspaceId] = this._openDb(registeredWorkspace._id);
     });
   }
 
@@ -95,30 +82,17 @@ export class PersistentStorageService {
    * 
    * @returns object containing opened pouchdbs
    */
-  workspaces(): Promise<{ [workspace_id: string]: any }> {
-    return new Promise((resolve, reject) => {
-      if (Object.keys(this._workspaces).includes(PERSONAL_WORKSPACE_NAME)) {
-        resolve(this._workspaces);
-      } else {
-        this._loadWorkspaces().then(() => {
-          if (Object.keys(this._workspaces).includes(PERSONAL_WORKSPACE_NAME)) {
-            resolve(this._workspaces);
-          } else {
-            this.deleteAllSpaces().then(() => {
-              this.createSpace(PERSONAL_WORKSPACE_NAME, "Personal Space", "", "").then((spaceId: string) => {
-                resolve(this._workspaces);
-              }).catch((err: Error) => {
-                reject(err);
-              });
-            }).catch((err: Error) => {
-              reject(err);
-            });
-          }
-        }).catch((err: Error) => {
-          reject(err);
-        });
-      }
-    });
+  async workspaces(): Promise<{ [workspace_id: string]: any }> {
+    if (Object.keys(this._workspaces).includes(PERSONAL_WORKSPACE_NAME)) {
+      return this._workspaces;
+    }
+    await this._loadWorkspaces();
+    if (Object.keys(this._workspaces).includes(PERSONAL_WORKSPACE_NAME)) {
+      return this._workspaces;
+    }
+    await this.deleteAllSpaces();
+    const spaceId = await this.createSpace(PERSONAL_WORKSPACE_NAME, "Personal Space", "", "");
+    return this._workspaces;
   }
 
   // Spaces CRUD Operations
@@ -131,19 +105,11 @@ export class PersistentStorageService {
    * @param pwHint 
    * @returns the spaceId created
    */
-  createSpace(spaceId: string, spaceName: string, pwDoubbleHash: string, pwHint: string): Promise<string> {
-    return new Promise((resolve, reject) => {
-      this.workspaceRegistry.post({ userWorkspaceId: spaceId }).then((response: DatabaseCondensedResponse) => {
-        this._workspaces[spaceId] = this._openDb(response.id);
-        this.initSpace(pwDoubbleHash, pwHint, spaceId, spaceName).then(() => {
-          resolve(spaceId);
-        }).catch((err: Error) => {
-          reject(err);
-        });
-      }).catch((err: Error) => {
-        reject(err);
-      })
-    })
+  async createSpace(spaceId: string, spaceName: string, pwDoubbleHash: string, pwHint: string): Promise<string> {
+    const response: DatabaseCondensedResponse = await this.workspaceRegistry.post({ userWorkspaceId: spaceId });
+    this._workspaces[spaceId] = this._openDb(response.id);
+    await this.initSpace(pwDoubbleHash, pwHint, spaceId, spaceName);
+    return spaceId;
   }
 
   /**
@@ -152,16 +118,10 @@ export class PersistentStorageService {
    * @param spaceId 
    * @returns count of all docs
    */
-  spaceDocumentCount(spaceId?: string): Promise<number> {
-    return new Promise((resolve, reject) => {
-      this._selectSpace(spaceId).then((spaceStorage: any) => {
-        spaceStorage.info().then((info: any) => {
-          resolve(info.doc_count);
-        })
-      }).catch((err: Error) => {
-        reject(err);
-      });
-    });
+  async spaceDocumentCount(spaceId?: string): Promise<number> {
+    const spaceStorage = await this._selectSpace(spaceId);
+    const info = await spaceStorage.info()
+    return info.doc_count;
   }
 
   /**
@@ -172,23 +132,17 @@ export class PersistentStorageService {
    * @param spaceId 
    * @returns 
    */
-  initSpace(pwDoubleHash: string, pwHint: string, spaceId: string, spaceName: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      const spaceConf: EncryptedSpaceConf = {
-        _id: "",
-        _rev: "",
-        name: spaceName,
-        pwDoubleHash: pwDoubleHash,
-        pwHint: pwHint,
-        personal: (spaceId === PERSONAL_WORKSPACE_NAME),
-        type: "space-conf"
-      }
-      this.createDocument(spaceConf, spaceId).then((document: EncryptedDocument) => {
-        resolve()
-      }).catch((err: Error) => {
-        reject(err);
-      });
-    });
+  async initSpace(pwDoubleHash: string, pwHint: string, spaceId: string, spaceName: string): Promise<void> {
+    const spaceConf: EncryptedSpaceConf = {
+      _id: "",
+      _rev: "",
+      name: spaceName,
+      pwDoubleHash: pwDoubleHash,
+      pwHint: pwHint,
+      personal: (spaceId === PERSONAL_WORKSPACE_NAME),
+      type: "space-conf"
+    }
+    const document = await this.createDocument(spaceConf, spaceId);
   }
 
   /**
@@ -197,23 +151,15 @@ export class PersistentStorageService {
    * @param spaceId 
    * @returns all loaded encrypted documents from the space
    */
-  loadSpace(spaceId?: string): Promise<EncryptedDocument[]> {
-    return new Promise((resolve, reject) => {
-      this._selectSpace(spaceId).then((spaceStorage: any) => {
-        spaceStorage.allDocs({
-          include_docs: true,
-          attachments: true
-        }).then((result: any) => {
-          resolve(result.rows.map((row: any) => {
-            return row.doc;
-          }) as EncryptedDocument[]);
-        }).catch((err: Error) => {
-          reject(err);
-        });
-      }).catch((err: Error) => {
-        reject(err);
-      });
+  async loadSpace(spaceId?: string): Promise<EncryptedDocument[]> {
+    const spaceStorage = await this._selectSpace(spaceId);
+    const result = await spaceStorage.allDocs({
+      include_docs: true,
+      attachments: true
     });
+    return result.rows.map((row: any) => {
+      return row.doc;
+    }) as EncryptedDocument[];
   }
 
   /**
@@ -223,33 +169,17 @@ export class PersistentStorageService {
    * @param spaceId 
    * @returns 
    */
-  deleteSpace(spaceId?: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this._selectSpace(spaceId).then((spaceStorage: any) => {
-        spaceStorage.info().then((info: any) => {
-          const dbName: string = info.db_name;
-          spaceStorage.destroy().then(() => {
-            this.workspaceRegistry.get(dbName).then((result: RegisteredWorkspace) => {
-              this.workspaceRegistry.remove(result).then(() => {
-                if (typeof spaceId === 'undefined') {
-                  spaceId = PERSONAL_WORKSPACE_NAME;
-                } 
-                delete this._workspaces[spaceId];
-                resolve();
-              }).catch((err: Error) => {
-                reject(err);
-              });
-            })
-          }).catch((err: Error) => {
-            reject(err);
-          });
-        }).catch((err: Error) => {
-          reject(err);
-        });
-      }).catch((err: Error) => {
-        reject(err);
-      });
-    });
+  async deleteSpace(spaceId?: string): Promise<void> {
+    const spaceStorage = await this._selectSpace(spaceId);
+    const info = await spaceStorage.info();
+    const dbName: string = info.db_name;
+    await spaceStorage.destroy()
+    const result: RegisteredWorkspace = await this.workspaceRegistry.get(dbName);
+    await this.workspaceRegistry.remove(result);
+    if (typeof spaceId === 'undefined') {
+      spaceId = PERSONAL_WORKSPACE_NAME;
+    }
+    delete this._workspaces[spaceId];
   }
 
   /**
@@ -257,17 +187,12 @@ export class PersistentStorageService {
    * s
    * @returns 
    */
-  deleteAllSpaces(): Promise<void> {
-    return new Promise(async (resolve, reject) => {
-      const knownSpaces: string[] = Object.keys(this._workspaces);
-      Promise.all(knownSpaces.map(async (spaceId: string) => {
-        return this.deleteSpace(spaceId);
-      })).then(() => {
-        resolve()
-      }).catch((err: Error) => {
-        reject(err);
-      });
-    });
+  async deleteAllSpaces(): Promise<void> {
+    const knownSpaces: string[] = Object.keys(this._workspaces);
+    await Promise.all(knownSpaces.map(async (spaceId: string) => {
+      return this.deleteSpace(spaceId);
+    }))
+    return;
   }
 
   // Document CUD operations
@@ -279,25 +204,14 @@ export class PersistentStorageService {
    * @param spaceId 
    * @returns The created document with _id and _rev.
    */
-  createDocument(document: EncryptedDocument, spaceId?: string): Promise<EncryptedDocument> {
-    return new Promise((resolve, reject) => {
-      this._selectSpace(spaceId).then((spaceStorage: any) => {
-        const createDocument: any = document;
-        delete createDocument._id;
-        delete createDocument._rev;
-        spaceStorage.post(createDocument).then((response: DatabaseCondensedResponse) => {
-          spaceStorage.get(response.id).then((returnDocument: EncryptedDocument) => {
-            resolve(returnDocument);
-          }).catch((err: Error) => {
-            reject(err);
-          });
-        }).catch((err: Error) => {
-          reject(err);
-        });
-      }).catch((err: Error) => {
-        reject(err);
-      });
-    });
+  async createDocument(document: EncryptedDocument, spaceId?: string): Promise<EncryptedDocument> {
+    const spaceStorage: any = await this._selectSpace(spaceId);
+    const createDocument: any = document;
+    delete createDocument._id;
+    delete createDocument._rev;
+    const response: DatabaseCondensedResponse = await spaceStorage.post(createDocument);
+    const returnDocument: EncryptedDocument = await spaceStorage.get(response.id);
+    return returnDocument
   }
 
   /**
@@ -307,15 +221,10 @@ export class PersistentStorageService {
    * @param spaceId 
    * @returns 
    */
-  getDocumentByType(documentType: string, spaceId?: string): Promise<EncryptedDocument[]> {
-    return new Promise((resolve, reject) => {
-      this.loadSpace(spaceId).then((documents: EncryptedDocument[]) => {
-        resolve(documents.filter((item: EncryptedDocument) => {
-          return item.type === documentType;
-        }))
-      }).catch((err: Error) => {
-        reject(err);
-      })
+  async getDocumentByType(documentType: string, spaceId?: string): Promise<EncryptedDocument[]> {
+    const documents: EncryptedDocument[] = await this.loadSpace(spaceId);
+    return documents.filter((item: EncryptedDocument) => {
+      return item.type === documentType;
     });
   }
 
@@ -327,24 +236,13 @@ export class PersistentStorageService {
    * @param spaceId 
    * @returns The updated document with new _rev.
    */
-  updateDocument(document: EncryptedDocument, spaceId?: string): Promise<EncryptedDocument> {
-    return new Promise((resolve, reject) => {
-      this._selectSpace(spaceId).then((spaceStorage: any) => {
-        spaceStorage.get(document._id).then((fetchedDocument: EncryptedDocument) => {
-          document._rev = fetchedDocument._rev;
-          spaceStorage.put(document).then((response: DatabaseCondensedResponse) => {
-            document._rev = response.rev;
-            resolve(document);
-          }).catch((err: Error) => {
-            reject(err);
-          });
-        }).catch((err: Error) => {
-          reject(err);
-        });
-      }).catch((err: Error) => {
-        reject(err);
-      });
-    })
+  async updateDocument(document: EncryptedDocument, spaceId?: string): Promise<EncryptedDocument> {
+    const spaceStorage: any = await this._selectSpace(spaceId);
+    const fetchedDocument: EncryptedDocument = await spaceStorage.get(document._id);
+    document._rev = fetchedDocument._rev;
+    const response: DatabaseCondensedResponse = await spaceStorage.put(document);
+    document._rev = response.rev;
+    return document;
   }
 
   /**
@@ -355,21 +253,9 @@ export class PersistentStorageService {
    * @param spaceId 
    * @returns 
    */
-  deleteDocument(document: EncryptedDocument, spaceId?: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this._selectSpace(spaceId).then((spaceStorage: any) => {
-        spaceStorage.get(document._id).then((fetchedDocument: EncryptedDocument) => {
-          spaceStorage.remove(fetchedDocument).then(() => {
-            resolve();
-          }).then((err: Error) => {
-            reject(err);
-          });
-        }).catch((err: Error) => {
-          reject(err);
-        });
-      }).catch((err: Error) => {
-        reject(err);
-      });
-    })
+  async deleteDocument(document: EncryptedDocument, spaceId?: string): Promise<void> {
+    const spaceStorage: any = await this._selectSpace(spaceId);
+    const fetchedDocument: EncryptedDocument = await spaceStorage.get(document._id);
+    await spaceStorage.remove(fetchedDocument);
   }
 }

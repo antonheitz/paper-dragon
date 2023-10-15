@@ -31,20 +31,14 @@ export class RegisterComponent {
     }
   }
 
-  registerLocal(): void {
+  async registerLocal(): Promise<void> {
     if (this.clearPassword === this.clearPasswordConfirm && this.clearPassword.length > 0) {
-      this.cryptoService.hashString(this.clearPassword).then((hashedPassword: string) => {
-        this.cryptoService.hashString(hashedPassword).then((doubbleHashedPassword: string) => {
-          const personalSpaceConf: RuntimeSpaceConf = this.runtimeStorageService.spaces[this.runtimeStorageService._getSpaceId()].spaceConf;
-          personalSpaceConf.pwDoubleHash = doubbleHashedPassword;
-          this.localErrorMessage = "";
-          this.runtimeStorageService.updateDocument(personalSpaceConf)
-        }).catch((err: Error) => {
-          this.localErrorMessage = String(err);
-        })
-      }).catch((err: Error) => {
-        this.localErrorMessage = String(err);
-      })
+      const hashedPassword: string = await this.cryptoService.hashString(this.clearPassword);
+      const doubbleHashedPassword: string = await this.cryptoService.hashString(hashedPassword);
+      const personalSpaceConf: RuntimeSpaceConf = this.runtimeStorageService.spaces[this.runtimeStorageService._getSpaceId()].spaceConf;
+      personalSpaceConf.pwDoubleHash = doubbleHashedPassword;
+      this.localErrorMessage = "";
+      await this.runtimeStorageService.updateDocument(personalSpaceConf);
     }
   }
 }

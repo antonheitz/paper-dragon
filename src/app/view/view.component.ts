@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RuntimeStorageService } from '../services/runtime-storage.service';
 
 @Component({
@@ -6,14 +6,15 @@ import { RuntimeStorageService } from '../services/runtime-storage.service';
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.sass']
 })
-export class ViewComponent {
+export class ViewComponent implements OnInit {
 
   initialized: boolean = false
 
-  constructor(private runtimeStorage: RuntimeStorageService) {
-    this.runtimeStorage.init().then(() => {
-      this.initialized = true;
-    })
+  constructor(private runtimeStorage: RuntimeStorageService) { }
+
+  async ngOnInit(): Promise<void> {
+    await this.runtimeStorage.init();
+    this.initialized = true;
   }
 
   get unlocked(): boolean {

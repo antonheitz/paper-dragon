@@ -17,23 +17,15 @@ export class LoginComponent {
 
   constructor(private cryptoService: CryptoService, private runtimeStorage: RuntimeStorageService) { }
 
-  attemptLogin(): void {
-    this.cryptoService.hashString(this.clearPassword).then((passwordHash: string) => {
-      this.cryptoService.hashString(passwordHash).then((doubblePasswordHash: string) => {
-        if (this.doubblePwHash === doubblePasswordHash) {
-          this.error = false;
-          this.runtimeStorage.decryptSpace(passwordHash)
-        } else {
-          this.error = true;
-          this.errorMessage = "The password is not right!";
-        }
-      }).catch((err: Error) => {
-        this.error = true;
-        this.errorMessage = String(err);
-      })
-    }).catch((err: Error) => {
+  async attemptLogin(): Promise<void> {
+    const passwordHash: string = await this.cryptoService.hashString(this.clearPassword);
+    const doubblePasswordHash: string = await this.cryptoService.hashString(passwordHash);
+    if (this.doubblePwHash !== doubblePasswordHash) {
       this.error = true;
-      this.errorMessage = String(err);
-    })
+      this.errorMessage = "The password is not right!";
+      return
+    }
+    this.error = false;
+    this.runtimeStorage.decryptSpace(passwordHash);
   }
 }
