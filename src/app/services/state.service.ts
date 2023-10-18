@@ -53,4 +53,14 @@ export class StateService {
   getCurrentSpaceId(): string {
     return this.currentSpaceId;
   }
+
+  private currentNoteId: string = "";
+
+  setCurrentNoteId(noteId: string): void {
+    this.currentNoteId = noteId;
+  }
+
+  getCurrentNoteId(): string {
+    return this.currentNoteId;
+  }
 }

@@ -4,7 +4,7 @@ import { StateService } from 'src/app/services/state.service';
 
 import { MainComponent } from './main.component';
 import { SpacesComponent } from './spaces/spaces.component';
-import { OverviewComponent } from './overview/overview.component';
+import { NotesComponent } from './overview/notes.component';
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -12,7 +12,7 @@ describe('MainComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MainComponent, SpacesComponent, OverviewComponent],
+      declarations: [MainComponent, SpacesComponent, NotesComponent],
       imports: [
         BrowserAnimationsModule
       ],

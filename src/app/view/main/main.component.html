@@ -7,7 +7,7 @@
     </div>
     <div class="column-wrapper data-column">
         <div class="field-wrapper notes elevated">
-            <app-overview></app-overview>
+            <app-notes></app-notes>
         </div>
         <div class="resizer" (pointerdown)="startResize($event)"></div>
     </div>
@@ -37,7 +37,7 @@
                 <app-spaces></app-spaces>
             </div>
             <div *ngIf="currentMainView === 'notes'" class="notes content-field elevated">
-                <app-overview></app-overview>
+                <app-notes></app-notes>
             </div>
             <div *ngIf="currentMainView === 'entries'" class="entries content-field elevated">
                 <app-entries></app-entries>
@@ -61,7 +61,7 @@
             <app-spaces></app-spaces>
         </div>
         <div *ngIf="currentMainView === 'notes'" class="notes small-field-wrapper">
-            <app-overview></app-overview>
+            <app-notes></app-notes>
         </div>
         <div *ngIf="currentMainView === 'entries'" class="entries small-field-wrapper">
             <app-entries></app-entries>

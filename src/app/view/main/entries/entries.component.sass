@@ -1,0 +1,74 @@
+.entries-wrapper
+    height: 100%
+    display: flex
+    flex-direction: column
+    white-space: nowrap
+    overflow-x: hidden
+    text-overflow: ellipsis
+    overflow-y: scroll
+    -ms-overflow-style: none
+    scrollbar-width: none
+    width: 100%
+    padding-top: var(--internal-padding)
+
+    &::-webkit-scrollbar
+        display: none
+
+    .entries-title-wrapper
+        width: calc(100% - var(--doubble-internal-padding))
+        padding: var(--internal-padding)
+        padding-top: 0px
+
+        .title-row
+            width: 100%
+            border-bottom: 1px solid var(--entries-text-color)
+            display: flex
+            flex-direction: row
+            justify-content: space-between
+
+            .title-text
+                font-weight: 500
+
+            .title-controls
+                display: flex
+                flex-direction: row
+
+                .add-entry
+                    font-weight: 500
+
+                    &:hover
+                        cursor: pointer
+                        background-color: var(--entries-hover-color)
+                        border-radius: var(--corner-radius)
+
+    .create-entry
+        width: calc(100% - var(--doubble-internal-padding) - var(--internal-padding))
+        padding-left: var(--doubble-internal-padding)
+        padding-right: var(--internal-padding)
+
+        .title-input
+            border: none
+            color: var(--entries-text-color)
+            width: 100%
+            background-color: var(--entries-background-color)
+
+            &:focus
+                outline: none
+
+    .entry-item
+        width: calc(100% - var(--doubble-internal-padding) - var(--internal-padding))
+        padding-left: var(--doubble-internal-padding)
+        padding-right: var(--internal-padding)
+
+        &:hover
+            cursor: pointer
+            background-color: var(--entries-hover-color)
+            border-radius: var(--corner-radius)
+
+    .entries-empty
+        width: calc(100% - var(--doubble-internal-padding) - var(--internal-padding))
+        padding-left: var(--internal-padding)
+        padding-right: var(--internal-padding)
+        opacity: 80%
+        text-align: center
+        white-space: break-spaces
