@@ -26,6 +26,7 @@ describe('PersistentStorageService', () => {
       _id: "this will be replaced",
       _rev: "this too",
       title: "test entry",
+      order: 1,
       noteId: "the note to add it to",
       content: "Hello there! General Kenobi",
       type: "entry"

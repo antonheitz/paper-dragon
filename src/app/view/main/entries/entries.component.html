@@ -7,17 +7,19 @@
             </div>
         </div>
     </div>
-    <div *ngIf="createEntry" class="create-entry">
-        <input type="text" class="title-input" [(ngModel)]="createEntryTitle" placeholder="New Entry"
-            (keyup.enter)="addEntryTest()" (focusout)="addEntryTest()" (keyup.escape)="resetAddEntry()" autofocus />
-    </div>
-    <div *ngFor="let entry of entries" class="entry-item">
-        {{ entry.title }}
-    </div>
-    <div *ngIf="!selectedNote" class="entries-empty">
-        Please select a Note First
-    </div>
-    <div *ngIf="entries.length === 0 && !createEntry && selectedNote" class="entries-empty">
-        No Entry yet. Add one!
+    <div class="entries-list-wrapper">
+        <div *ngIf="createEntry" class="create-entry">
+            <input type="text" class="title-input" [(ngModel)]="createEntryTitle" placeholder="New Entry"
+                (keyup.enter)="addEntryTest()" (focusout)="addEntryTest()" (keyup.escape)="resetAddEntry()" autofocus />
+        </div>
+        <div *ngFor="let entry of entries" class="entry-item">
+            {{ entry.title }}
+        </div>
+        <div *ngIf="!selectedNote" class="entries-empty">
+            Please select a Note First
+        </div>
+        <div *ngIf="entries.length === 0 && !createEntry && selectedNote" class="entries-empty">
+            No Entry yet. Add one!
+        </div>
     </div>
 </div>

@@ -33,6 +33,7 @@ export class EntriesComponent {
         decrypted: true,
         title: this.createEntryTitle,
         content: "",
+        order: this.entries.length,
         noteId: this.stateService.getCurrentNoteId(),
         _id: "",
         _rev: ""

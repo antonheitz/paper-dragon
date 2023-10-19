@@ -1,11 +1,11 @@
-.entries-wrapper
+.notes-wrapper
     display: flex
     flex-direction: column
     white-space: nowrap
     height: 100%
     width: 100%
 
-    .entries-title-wrapper
+    .notes-title-wrapper
         width: calc(100% - var(--doubble-internal-padding))
         padding: var(--internal-padding)
         padding-top: 0px
@@ -13,7 +13,7 @@
         .title-row
             padding-top: var(--internal-padding)
             width: 100%
-            border-bottom: 1px solid var(--entries-text-color)
+            border-bottom: 1px solid var(--notes-text-color)
             display: flex
             flex-direction: row
             justify-content: space-between
@@ -25,15 +25,15 @@
                 display: flex
                 flex-direction: row
 
-                .add-entry
+                .add-note
                     font-weight: 500
 
                     &:hover
                         cursor: pointer
-                        background-color: var(--entries-hover-color)
+                        background-color: var(--notes-hover-color)
                         border-radius: var(--corner-radius)
 
-    .entries-list-wrapper
+    .notes-list-wrapper
         flex-grow: 1
         overflow-x: hidden
         text-overflow: ellipsis
@@ -44,31 +44,31 @@
         &::-webkit-scrollbar
             display: none
 
-        .create-entry
+        .create-note
             width: calc(100% - var(--doubble-internal-padding) - var(--internal-padding))
             padding-left: var(--doubble-internal-padding)
             padding-right: var(--internal-padding)
 
             .title-input
                 border: none
-                color: var(--entries-text-color)
+                color: var(--notes-text-color)
                 width: 100%
-                background-color: var(--entries-background-color)
+                background-color: var(--notes-background-color)
 
                 &:focus
                     outline: none
 
-        .entry-item
+        .notes-item
             width: calc(100% - var(--doubble-internal-padding) - var(--internal-padding))
             padding-left: var(--doubble-internal-padding)
             padding-right: var(--internal-padding)
 
             &:hover
                 cursor: pointer
-                background-color: var(--entries-hover-color)
+                background-color: var(--notes-hover-color)
                 border-radius: var(--corner-radius)
 
-        .entries-empty
+        .notes-empty
             height: calc(100% - var(--doubble-internal-padding))
             width: calc(100% - var(--doubble-internal-padding))
             display: flex

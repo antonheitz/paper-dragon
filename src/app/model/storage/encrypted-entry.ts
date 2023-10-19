@@ -5,4 +5,5 @@ export interface EncryptedEntry extends BaseDocument {
     noteId: string
     content: string
     type: "entry"
+    order: number
 }
