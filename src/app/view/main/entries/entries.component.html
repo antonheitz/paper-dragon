@@ -1,1 +1,23 @@
-<div>entries component</div>
+<div class="entries-wrapper">
+    <div class="entries-title-wrapper">
+        <div class="title-row">
+            <div class="title-text">Entries</div>
+            <div class="title-controls">
+                <div (click)="openAddEntry()" *ngIf="selectedNote" class="add-entry">+</div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="createEntry" class="create-entry">
+        <input type="text" class="title-input" [(ngModel)]="createEntryTitle" placeholder="New Entry"
+            (keyup.enter)="addEntryTest()" (focusout)="addEntryTest()" (keyup.escape)="resetAddEntry()" autofocus />
+    </div>
+    <div *ngFor="let entry of entries" class="entry-item">
+        {{ entry.title }}
+    </div>
+    <div *ngIf="!selectedNote" class="entries-empty">
+        Please select a Note First
+    </div>
+    <div *ngIf="entries.length === 0 && !createEntry && selectedNote" class="entries-empty">
+        No Entry yet. Add one!
+    </div>
+</div>

@@ -10,7 +10,7 @@ import { MainComponent } from './view/main/main.component';
 import { SpacesComponent } from './view/main/spaces/spaces.component';
 
 import { MatIconModule } from '@angular/material/icon';
-import { OverviewComponent } from './view/main/overview/overview.component';
+import { NotesComponent } from './view/main/overview/notes.component';
 import { LockedComponent } from './view/locked/locked.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './view/locked/login/login.component';
@@ -24,7 +24,7 @@ import { EntriesComponent } from './view/main/entries/entries.component';
     ViewComponent,
     MainComponent,
     SpacesComponent,
-    OverviewComponent,
+    NotesComponent,
     LockedComponent,
     LoginComponent,
     RegisterComponent,
