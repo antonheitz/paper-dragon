@@ -32,6 +32,7 @@ describe('RuntimeStorageService', () => {
       noteId: "parent-note-id",
       content: "",
       type: "entry",
+      order: 1,
       encryptedKeys: ["title", "content"],
       decrypted: true,
       _id: "newly-added",

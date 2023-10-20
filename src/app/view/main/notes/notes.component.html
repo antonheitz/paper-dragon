@@ -1,13 +1,13 @@
-<div class="overview-wrapper">
-    <div class="notes-wrapper">
-        <div class="notes-title-wrapper">
-            <div class="title-row">
-                <div class="title-text">Notes</div>
-                <div class="title-controls">
-                    <div (click)="openAddNote()" class="add-note">+</div>
-                </div>
+<div class="notes-wrapper">
+    <div class="notes-title-wrapper">
+        <div class="title-row">
+            <div class="title-text">Notes</div>
+            <div class="title-controls">
+                <div (click)="openAddNote()" class="add-note">+</div>
             </div>
         </div>
+    </div>
+    <div class="notes-list-wrapper">
         <div *ngIf="createNote" class="create-note">
             <input type="text" class="title-input" [(ngModel)]="createNoteTitle" placeholder="New Note"
                 (keyup.enter)="addNoteTest()" (focusout)="addNoteTest()" (keyup.escape)="resetAddNote()" autofocus />

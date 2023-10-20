@@ -170,6 +170,7 @@ export class RuntimeStorageService {
             noteId: document.noteId,
             content: document.content,
             type: document.type,
+            order: document.order,
             encryptedKeys: ["title", "content"],
             decrypted: false,
             _id: document._id,

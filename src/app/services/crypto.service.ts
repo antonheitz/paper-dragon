@@ -199,6 +199,7 @@ export class CryptoService {
           content: document.content,
           noteId: document.noteId,
           type: "entry",
+          order: document.order,
           _id: document._id,
           _rev: document._rev
         }

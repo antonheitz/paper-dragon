@@ -103,6 +103,7 @@ describe('CryptoService', () => {
       noteId: "parent-note-id",
       content: encryptedString2,
       type: "entry",
+      order: 1,
       encryptedKeys: ["title", "content"],
       decrypted: false,
       _id: "test-entry-id",
